@@ -1,0 +1,205 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Footer from "../components/Footer.astro";
+
+// ===== Configure your content here =====
+const site = {
+  name: "Jane Doe",
+  role: "Creative technologist",
+  company: "Acme Labs",
+  email: "jane@example.com",
+};
+
+const recentShips = [
+  {
+    href: "#",
+    title: "Overhauled the onboarding experience for new users",
+    role: "Project lead",
+    imageUrl: "https://placehold.co/1110x773/e8eaf0/555560?text=01",
+  },
+  {
+    href: "#",
+    title: "Real-time collaboration engine for documents",
+    role: "Contributor",
+    imageUrl: "https://placehold.co/1110x773/e8eaf0/555560?text=02",
+  },
+  {
+    href: "#",
+    title: "Accessibility audit and remediation across the platform",
+    role: "Contributor",
+    imageUrl: "https://placehold.co/1110x773/e8eaf0/555560?text=03",
+  },
+  {
+    href: "#",
+    title: "Dark mode and theming system",
+    role: "Contributor",
+    imageUrl: "https://placehold.co/1110x773/e8eaf0/555560?text=04",
+  },
+  {
+    href: "#",
+    title: "Notifications redesign for mobile and web",
+    role: "Project lead",
+    imageUrl: "https://placehold.co/1110x773/e8eaf0/555560?text=05",
+  },
+  {
+    href: "#",
+    title: "Search infrastructure and ranking improvements",
+    role: "Project lead",
+    imageUrl: "https://placehold.co/1110x773/e8eaf0/555560?text=06",
+  },
+];
+
+const previousWork = [
+  {
+    href: "#",
+    title: "Streamlining logistics for a freight startup",
+    role: "Lead, end-to-end",
+    imageUrl: "https://placehold.co/1110x773/e8eaf0/555560?text=A",
+  },
+  {
+    href: "#",
+    title: "Patient portal for a regional health network",
+    role: "Lead, end-to-end",
+    imageUrl: "https://placehold.co/1110x773/e8eaf0/555560?text=B",
+  },
+  {
+    href: "#",
+    title: "Older projects and explorations",
+    role: "Various roles",
+    imageUrl: "https://placehold.co/1110x773/e8eaf0/555560?text=C",
+  },
+  {
+    href: "#",
+    title: "Reimagining the checkout flow",
+    role: "Lead, end-to-end",
+    imageUrl: "https://placehold.co/1110x773/e8eaf0/555560?text=D",
+  },
+];
+
+const sideProjects = [
+  {
+    href: "#",
+    title: "colors.page",
+    role: "Code, concept",
+    imageUrl: "https://placehold.co/1110x773/d6ecff/555560?text=~",
+    frameBg: "#d6ecff",
+  },
+  {
+    href: "#",
+    title: "Tiny Synth",
+    role: "Code, sound design",
+    imageUrl: "https://placehold.co/1110x773/f5facf/555560?text=~",
+    frameBg: "#f5facf",
+  },
+];
+---
+
+<BaseLayout title={`${site.name} · ${site.role}`}>
+  <Header
+    name={site.name}
+    role={site.role}
+    company={site.company}
+    email={site.email}
+    activePage="work"
+  />
+
+  <main>
+    <!-- Currently working on -->
+    <section>
+      <SectionHeader
+        id="currently-working-on"
+        title="Currently working on"
+        showDot={true}
+        class="pt-3"
+      />
+      <h1 class="sr-only">{site.name}</h1>
+      <h2 class="h1 mb-7">Interactive tools and data visualization</h2>
+    </section>
+
+    <!-- Bio -->
+    <section>
+      <p>
+        I'm a creative technologist at
+        <a href="#" class="avatar-link">
+          <img
+            src="https://placehold.co/20x20/090e24/ffffff?text=A"
+            alt={site.company}
+            class="avatar"
+            width="20"
+            height="20"
+          />
+          {site.company}</a
+        >, currently focused on
+        <a href="#">interactive tools and data visualization</a>. Over the past
+        several years, I've shipped work across onboarding, collaboration,
+        search, notifications, and developer infrastructure.
+      </p>
+      <p>
+        I started out writing backend services and gradually moved toward the
+        intersection of engineering and craft. I still push code regularly and
+        find that fluency in both worlds helps me move faster, communicate
+        clearly with engineers, and ship work that holds up under real
+        constraints.
+      </p>
+    </section>
+
+    <!-- Recent ships -->
+    <section>
+      <SectionHeader id="recent-ships" title="Recent ships" />
+      <div class="content-grid -equal mb-3">
+        {
+          recentShips.map((project) => (
+            <ProjectCard
+              href={project.href}
+              title={project.title}
+              role={project.role}
+              imageUrl={project.imageUrl}
+              external={true}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Previous work -->
+    <section>
+      <SectionHeader id="previous-work" title="Previous work" />
+      <div class="content-grid">
+        {
+          previousWork.map((project) => (
+            <ProjectCard
+              href={project.href}
+              title={project.title}
+              role={project.role}
+              imageUrl={project.imageUrl}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Side projects -->
+    <section>
+      <SectionHeader id="side-projects" title="Side projects" />
+      <div class="content-grid -equal">
+        {
+          sideProjects.map((project) => (
+            <ProjectCard
+              href={project.href}
+              title={project.title}
+              role={project.role}
+              imageUrl={project.imageUrl}
+              external={true}
+              frameBg={project.frameBg}
+            />
+          ))
+        }
+      </div>
+    </section>
+  </main>
+
+  <Footer email={site.email} />
+</BaseLayout>

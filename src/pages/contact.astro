@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import ListItem from "../components/ListItem.astro";
+import Footer from "../components/Footer.astro";
+
+const site = {
+  name: "Jane Doe",
+  role: "Creative technologist",
+  company: "Acme Labs",
+  email: "jane@example.com",
+};
+
+const contacts = [
+  { title: "Mail", trailing: "jane@example.com", href: `mailto:${site.email}` },
+  { title: "Twitter (X)", trailing: "@janedoe", href: "#" },
+  { title: "LinkedIn", trailing: "jane-doe", href: "#" },
+  { title: "GitHub", trailing: "@janedoe", href: "#" },
+  { title: "CodePen", trailing: "janedoe", href: "#" },
+];
+---
+
+<BaseLayout title={`Contact · ${site.name}`}>
+  <Header
+    name={site.name}
+    role={site.role}
+    company={site.company}
+    email={site.email}
+    activePage="contact"
+  />
+
+  <main>
+    <!-- Hero -->
+    <section>
+      <h1 class="mb-7">Say hello</h1>
+    </section>
+
+    <!-- Intro -->
+    <section>
+      <p>
+        The quickest way to reach me is <a href={`mailto:${site.email}`}>{site.email}</a>.
+        For something more casual, find me on
+        <a href="#">Twitter</a> or <a href="#">LinkedIn</a>.
+      </p>
+    </section>
+
+    <!-- Contact list -->
+    <section>
+      <SectionHeader id="contact" title="Elsewhere" />
+      <div class="list-container">
+        {
+          contacts.map((item) => (
+            <ListItem
+              title={item.title}
+              trailing={item.trailing}
+              href={item.href}
+              external={true}
+            />
+          ))
+        }
+      </div>
+    </section>
+  </main>
+
+  <Footer email={site.email} />
+</BaseLayout>

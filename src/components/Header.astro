@@ -1,0 +1,230 @@
+---
+interface Props {
+  name: string;
+  role: string;
+  company: string;
+  email: string;
+  avatarUrl?: string;
+  activePage?: string;
+}
+
+const {
+  name,
+  role,
+  company,
+  email,
+  avatarUrl = "https://placehold.co/80x80/e2e8f0/090e24?text=You",
+  activePage = "work",
+} = Astro.props;
+
+const navLinks = [
+  { href: "/", text: "Work", id: "work" },
+  { href: "/about", text: "About", id: "about" },
+  { href: "/contact", text: "Contact", id: "contact" },
+];
+---
+
+<header class="mb-4">
+  <div class="brand d-flex flex-items-center">
+    <div class="wrapper d-flex flex-items-center">
+      <a href="/" class="link d-none d-md-block"></a>
+      <div class="image-container mr-3 rounded-lg">
+        <img
+          src={avatarUrl}
+          alt="Profile headshot"
+          class="image"
+          width="80"
+          height="80"
+        />
+      </div>
+      <div class="info">
+        <a href="/" class="title">{name}</a>
+        <div class="desc color-fg-muted">{role} @ {company}</div>
+      </div>
+    </div>
+  </div>
+  <div class="links d-flex flex-items-center flex-justify-end gap-1">
+    <label
+      class="toggle-nav d-flex flex-items-center flex-justify-end gap-1"
+      data-js-toggle-nav-container
+    >
+      <input type="checkbox" class="input d-none" data-js-nav-input />
+      <button
+        aria-label="Toggle nav"
+        class="navButton flex-0 btn-icon btn-invisible"
+        data-js-nav-button
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="content icon d-flex"
+          data-js-menu-collapsed="true"
+        >
+          <path d="M4 5h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 19h16"></path>
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="content icon d-none"
+          data-js-menu-expanded="true"
+        >
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+      <div class="menu">
+        <nav class="d-flex flex-items-center gap-1">
+          {
+            navLinks.map((link) => (
+              <a
+                href={link.href}
+                class={`link ${activePage === link.id ? "active" : ""}`}
+              >
+                <div class="item py-2 px-3">{link.text}</div>
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </label>
+    <div class="line" data-js-line>
+      <div class="divider-line pl-2 mr-2"></div>
+    </div>
+    <div class="contact" data-js-contact>
+      <div class="dropdown-container">
+        <div class="trigger tooltip-container" data-js-dropdown-trigger>
+          <div class="tooltip-container" data-js-tooltip-container>
+            <button class="btn-icon btn-invisible tooltip-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="content icon"
+              >
+                <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              </svg>
+            </button>
+            <span
+              class="tooltip"
+              data-position="bottom"
+              data-visible="false"
+              data-js-tooltip-text>Email options</span
+            >
+          </div>
+        </div>
+        <div class="panel" data-js-dropdown-panel>
+          <div class="dropdown-items">
+            <ul class="list">
+              <li class="item d-flex flex-items-center gap-1">
+                <a
+                  href={`mailto:${email}`}
+                  rel="noopener noreferrer"
+                  class="content"
+                >
+                  <span class="text">Send a message</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="trailingIcon"
+                  >
+                    <path d="M7 7h10v10"></path>
+                    <path d="M7 17 17 7"></path>
+                  </svg>
+                </a>
+              </li>
+              <li class="item">
+                <button
+                  class="btn btn-invisible content align-left color-fg-default"
+                  data-js-copy-to-clipboard
+                  data-js-clipboard-text={email}
+                >
+                  Copy email address
+                </button>
+              </li>
+              <li class="footer" data-js-clipboard-feedback>{email}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="theme-toggle tooltip-container" data-js-tooltip-container>
+      <button
+        class="btn-icon btn-invisible tooltip-button"
+        data-js-theme-toggle
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="content icon sun-icon"
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.41 1.41"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="content icon moon-icon"
+        >
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+      </button>
+      <span
+        class="tooltip"
+        data-position="bottom"
+        data-visible="false"
+        data-js-tooltip-text>Toggle theme</span
+      >
+    </div>
+  </div>
+</header>

@@ -1,7 +1,7 @@
 // ===== Theme Toggle =====
 (function () {
   const getThemePreference = () => {
-    const stored = localStorage.getItem("theme");
+    const stored = sessionStorage.getItem("theme");
     if (stored) return stored;
     return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
@@ -11,7 +11,7 @@
   const applyTheme = (theme) => {
     document.documentElement.classList.remove("light", "dark");
     document.documentElement.classList.add(theme);
-    localStorage.setItem("theme", theme);
+    sessionStorage.setItem("theme", theme);
   };
 
   // Apply on load

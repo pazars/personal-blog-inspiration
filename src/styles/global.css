@@ -1021,6 +1021,17 @@ nav > .link.active {
   text-decoration: none;
 }
 
+/* Level thumbnails in asymmetric grid */
+.content-grid:not(.-equal) .image-wrapper > .image {
+  object-fit: cover;
+  height: 240px;
+}
+@media (min-width: 768px) {
+  .content-grid:not(.-equal) .image-wrapper > .image {
+    height: 320px;
+  }
+}
+
 .content-grid.-equal {
   grid-template-columns: 1fr 1fr;
   grid-template-areas:

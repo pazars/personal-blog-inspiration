@@ -7,9 +7,9 @@ import Footer from "../components/Footer.astro";
 
 // ===== Configure your content here =====
 const site = {
-  name: "Jane Doe",
-  role: "Creative technologist",
-  company: "Acme Labs",
+  name: "Dāvis Pazars",
+  role: "Sportists, programmētājs",
+  company: "",
   email: "jane@example.com",
 };
 
@@ -111,12 +111,17 @@ const sideProjects = [
     <section>
       <SectionHeader
         id="currently-working-on"
-        title="Currently working on"
+        title="Šobrīd gatavojos"
         showDot={true}
         class="pt-3"
       />
-      <h1 class="sr-only">{site.name}</h1>
-      <h2 class="h1 mb-7">Interactive tools and data visualization</h2>
+      
+      <h2 class="h1 mb-1">
+        <a href="https://vilkacumaratons.lv" target="_blank" rel="noopener noreferrer" class="d-inline-flex flex-items-center gap-2">
+          Vilkaču maratonam
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="trailingIcon"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+        </a>
+      </h2>
     </section>
 
     <!-- Bio -->
@@ -148,7 +153,7 @@ const sideProjects = [
 
     <!-- Recent ships -->
     <section>
-      <SectionHeader id="recent-ships" title="Recent ships" />
+      <SectionHeader id="recent-ships" title="Pēdējie raksti" />
       <div class="content-grid -equal mb-3">
         {
           recentShips.map((project) => (

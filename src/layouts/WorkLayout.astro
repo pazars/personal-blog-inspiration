@@ -3,6 +3,7 @@ import BaseLayout from "./BaseLayout.astro";
 import Header from "../components/Header.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import NewsletterForm from "../components/NewsletterForm.astro";
 import Footer from "../components/Footer.astro";
 
 interface SeeAlsoItem {
@@ -75,6 +76,14 @@ const { title, role, heroImage, heroImageAlt = title, seeAlso = [] } =
     <section class="work-gallery">
       <slot name="gallery" />
     </section>
+
+    <!-- Newsletter -->
+    <NewsletterForm
+      heading="Keep reading"
+      description="I send a short email once a month with what I've been writing about. No spam, unsubscribe anytime."
+      showBorder={true}
+      hideWhenSubscribed={true}
+    />
 
     <!-- See Also -->
     {

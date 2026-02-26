@@ -189,6 +189,55 @@
   }
 })();
 
+// ===== Newsletter Form =====
+(function () {
+  const SUBSCRIBED_KEY = "newsletter-subscribed";
+
+  // Hide forms marked with hideWhenSubscribed if already subscribed
+  if (localStorage.getItem(SUBSCRIBED_KEY)) {
+    document
+      .querySelectorAll('[data-js-hide-when-subscribed="true"]')
+      .forEach((section) => {
+        section.hidden = true;
+      });
+  }
+
+  document
+    .querySelectorAll("[data-js-newsletter-submit]")
+    .forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const section = form.closest("[data-js-newsletter-form]");
+        const emailInput = form.querySelector("[data-js-newsletter-email]");
+        const btn = form.querySelector("[data-js-newsletter-btn]");
+        const status = section.querySelector("[data-js-newsletter-status]");
+        const email = emailInput.value.trim();
+
+        if (!email) return;
+
+        // Submitting state
+        btn.disabled = true;
+        btn.textContent = "\u2026";
+        emailInput.disabled = true;
+        status.textContent = "";
+
+        // TODO: Replace with actual API call (Resend, ConvertKit, etc.)
+        // Example: fetch("/api/subscribe", {
+        //   method: "POST",
+        //   headers: { "Content-Type": "application/json" },
+        //   body: JSON.stringify({ email }),
+        // })
+        // For now, simulate a successful subscription
+        setTimeout(() => {
+          localStorage.setItem(SUBSCRIBED_KEY, "true");
+          form.style.display = "none";
+          status.textContent = "You\u2019re in \u2014 thanks.";
+        }, 600);
+      });
+    });
+})();
+
 // ===== Tooltips =====
 (function () {
   const tooltipContainers = document.querySelectorAll(

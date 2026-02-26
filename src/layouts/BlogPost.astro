@@ -1,0 +1,50 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Header from "../components/Header.astro";
+import NewsletterForm from "../components/NewsletterForm.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  date?: string;
+}
+
+const { title, description, date } = Astro.props;
+
+const site = {
+  name: "Jane Doe",
+  role: "Creative technologist",
+  company: "Acme Labs",
+  email: "jane@example.com",
+};
+---
+
+<BaseLayout title={`${title} · ${site.name}`} description={description}>
+  <Header
+    name={site.name}
+    role={site.role}
+    company={site.company}
+    email={site.email}
+  />
+
+  <main>
+    <article>
+      <section>
+        {date && <p class="color-fg-muted text-small mb-0">{date}</p>}
+        <h1 class="mb-7">{title}</h1>
+      </section>
+
+      <slot />
+    </article>
+
+    <NewsletterForm
+      heading="Keep reading"
+      description="I send a short email once a month with what I've been writing about. No spam, unsubscribe anytime."
+      showBorder={true}
+      hideWhenSubscribed={true}
+    />
+  </main>
+
+  <Footer email={site.email} />
+</BaseLayout>

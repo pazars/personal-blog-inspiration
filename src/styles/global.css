@@ -1172,6 +1172,40 @@ html.dark .theme-toggle .moon-icon {
   display: none;
 }
 
+/* ===== Subscribe Popup (Header Dropdown) ===== */
+.dropdown-container > .panel.subscribe-panel {
+  width: 400px;
+  max-width: calc(100vw - 2 * var(--body-padding));
+  top: 56px;
+}
+.subscribe-popup {
+  padding: 14px 16px;
+}
+.subscribe-popup-done {
+  padding: 14px 16px;
+}
+.subscribe-popup-desc {
+  font-size: var(--text-body-size-extra-small);
+  margin-bottom: 10px;
+  line-height: 1.4;
+  opacity: 0.6;
+}
+.subscribe-popup-form {
+  flex-direction: row;
+}
+.subscribe-popup-form .newsletter-input {
+  padding: 8px 12px;
+  font-size: var(--text-body-size-small);
+}
+.subscribe-popup-form .newsletter-btn {
+  padding: 8px 16px;
+  font-size: var(--text-body-size-small);
+}
+.subscribe-popup .newsletter-status {
+  font-size: var(--text-body-size-extra-small);
+  min-height: 1.2em;
+}
+
 /* ===== Work Detail Pages ===== */
 .work-hero {
   padding-bottom: 24px;

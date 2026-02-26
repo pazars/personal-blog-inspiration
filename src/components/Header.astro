@@ -131,48 +131,41 @@ const navLinks = [
               class="tooltip"
               data-position="bottom"
               data-visible="false"
-              data-js-tooltip-text>Email options</span
+              data-js-tooltip-text>Subscribe</span
             >
           </div>
         </div>
-        <div class="panel" data-js-dropdown-panel>
-          <div class="dropdown-items">
-            <ul class="list">
-              <li class="item d-flex flex-items-center gap-1">
-                <a
-                  href={`mailto:${email}`}
-                  rel="noopener noreferrer"
-                  class="content"
-                >
-                  <span class="text">Send a message</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="trailingIcon"
-                  >
-                    <path d="M7 7h10v10"></path>
-                    <path d="M7 17 17 7"></path>
-                  </svg>
-                </a>
-              </li>
-              <li class="item">
-                <button
-                  class="btn btn-invisible content align-left color-fg-default"
-                  data-js-copy-to-clipboard
-                  data-js-clipboard-text={email}
-                >
-                  Copy email address
-                </button>
-              </li>
-              <li class="footer" data-js-clipboard-feedback>{email}</li>
-            </ul>
+        <div class="panel subscribe-panel" data-js-dropdown-panel>
+          <div
+            class="subscribe-popup"
+            data-js-newsletter-form
+            data-js-hide-when-subscribed="true"
+          >
+            <p class="subscribe-popup-desc">
+              A short monthly email on engineering &amp; craft. No spam.
+            </p>
+            <form class="subscribe-popup-form d-flex gap-2" data-js-newsletter-submit>
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+                autocomplete="email"
+                class="newsletter-input flex-1"
+                data-js-newsletter-email
+              />
+              <button
+                type="submit"
+                class="newsletter-btn btn-secondary"
+                data-js-newsletter-btn
+              >
+                Subscribe
+              </button>
+            </form>
+            <div class="newsletter-status" data-js-newsletter-status></div>
+          </div>
+          <div class="subscribe-popup-done" data-js-subscribe-done style="display:none;">
+            <p class="subscribe-popup-desc">You're subscribed!</p>
           </div>
         </div>
       </div>

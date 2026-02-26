@@ -108,6 +108,21 @@
     });
   }
 
+  function sizeSubscribePanel(panel) {
+    const header = document.querySelector("header");
+    if (!header) return;
+    const headerLeft = header.getBoundingClientRect().left;
+    const panelRight = panel.getBoundingClientRect().right;
+    panel.style.maxWidth = panelRight - headerLeft + "px";
+  }
+
+  window.addEventListener("resize", () => {
+    const openPanel = document.querySelector(
+      ".subscribe-panel.-show"
+    );
+    if (openPanel) sizeSubscribePanel(openPanel);
+  });
+
   dropdownTriggers.forEach((trigger) => {
     trigger.addEventListener("click", (event) => {
       const panel = trigger.nextElementSibling;
@@ -117,6 +132,10 @@
       closeOpenDropdowns();
       if (shouldOpen) {
         panel.classList.add("-show");
+        // Size subscribe panel to span from icon to content left edge
+        if (panel.classList.contains("subscribe-panel")) {
+          sizeSubscribePanel(panel);
+        }
         // Hide tooltips
         document
           .querySelectorAll("[data-js-tooltip-text]")
@@ -128,7 +147,9 @@
   });
 
   dropdownPanels.forEach((panel) => {
-    panel.addEventListener("click", () => {
+    panel.addEventListener("click", (event) => {
+      // Don't auto-close if clicking inside a form (e.g. subscribe popup)
+      if (event.target.closest("form")) return;
       closeOpenDropdowns();
     });
   });
@@ -153,42 +174,6 @@
   );
 })();
 
-// ===== Copy to Clipboard =====
-(function () {
-  const copyBtn = document.querySelector("[data-js-copy-to-clipboard]");
-  if (!copyBtn) return;
-
-  copyBtn.addEventListener("click", function () {
-    const textToCopy = this.getAttribute("data-js-clipboard-text");
-    const triggerEl = document.querySelector("[data-js-dropdown-trigger]");
-
-    navigator.clipboard
-      .writeText(textToCopy)
-      .then(() => {
-        showTooltip(triggerEl, "Copied to clipboard!");
-      })
-      .catch(() => {
-        showTooltip(triggerEl, "Failed to copy", 3000);
-      });
-  });
-
-  function showTooltip(element, message, duration = 2000) {
-    // Remove existing dynamic tooltips
-    document
-      .querySelectorAll(".tooltip[data-visible='true']")
-      .forEach((t) => t.remove());
-
-    const tooltip = document.createElement("span");
-    tooltip.classList.add("tooltip");
-    tooltip.setAttribute("data-position", "bottom");
-    tooltip.setAttribute("data-visible", "true");
-    tooltip.textContent = message;
-    element.appendChild(tooltip);
-
-    setTimeout(() => tooltip.remove(), duration);
-  }
-})();
-
 // ===== Newsletter Form =====
 (function () {
   const SUBSCRIBED_KEY = "newsletter-subscribed";
@@ -199,6 +184,11 @@
       .querySelectorAll('[data-js-hide-when-subscribed="true"]')
       .forEach((section) => {
         section.hidden = true;
+        // Show the "subscribed" fallback if present (subscribe popup)
+        const doneEl = section.parentElement?.querySelector(
+          "[data-js-subscribe-done]"
+        );
+        if (doneEl) doneEl.style.display = "";
       });
   }
 
@@ -233,6 +223,11 @@
           localStorage.setItem(SUBSCRIBED_KEY, "true");
           form.style.display = "none";
           status.textContent = "You\u2019re in \u2014 thanks.";
+          // Show "subscribed" fallback if in a popup
+          const doneEl = section.parentElement?.querySelector(
+            "[data-js-subscribe-done]"
+          );
+          if (doneEl) doneEl.style.display = "";
         }, 600);
       });
     });

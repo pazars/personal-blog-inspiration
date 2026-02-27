@@ -1,6 +1,6 @@
 export const site = {
   name: "Dāvis Pazars",
-  role: "Sportists, programmētājs",
+  role: "Skrējējs, programmētājs",
   company: "",
   email: "",
 };

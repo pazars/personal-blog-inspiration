@@ -990,6 +990,11 @@ nav > .link.active {
   }
 }
 
+.content-grid.-equal .image-wrapper > .image {
+  object-fit: cover;
+  aspect-ratio: 1110 / 773;
+}
+
 .content-grid.-equal {
   grid-template-columns: 1fr 1fr;
   grid-template-areas:

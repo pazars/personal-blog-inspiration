@@ -73,19 +73,19 @@ const previousWork = [
 ];
 
 const sideProjects = [
-  {
-    href: "#",
-    title: "colors.page",
-    role: "Code, concept",
-    imageUrl: "https://placehold.co/1110x773/d6ecff/555560?text=~",
-    frameBg: "#d6ecff",
+    {
+    href: "https://pasaulesture.lv/",
+    title: "pasaulesture.lv",
+    role: "Riteņbraukšanas pasākumi Latvijā (ar našķiem)",
+    imageUrl: "/pt-thumbnail.jpg",
+    frameBg: "#d4dbb8",
   },
   {
-    href: "#",
-    title: "Tiny Synth",
-    role: "Code, sound design",
-    imageUrl: "https://placehold.co/1110x773/f5facf/555560?text=~",
-    frameBg: "#f5facf",
+    href: "https://noskrien-ziemu.pages.dev/",
+    title: "noskrien-ziemu.pages.dev",
+    role: "Dalībnieku rezultātu salīdzināšana",
+    imageUrl: "https://noskrien-ziemu.pages.dev/og-image.png",
+    frameBg: "#f1f7fc",
   },
 ];
 ---
@@ -144,6 +144,23 @@ const sideProjects = [
       </p>
     </section>
 
+    <!-- Previous work -->
+    <section>
+      <SectionHeader id="previous-work" title="Populārākās tēmas" />
+      <div class="content-grid">
+        {
+          previousWork.map((project) => (
+            <ProjectCard
+              href={project.href}
+              title={project.title}
+              role={project.role}
+              imageUrl={project.imageUrl}
+            />
+          ))
+        }
+      </div>
+    </section>
+
     <!-- Recent ships -->
     <section>
       <SectionHeader id="recent-ships" title="Pēdējie raksti" />
@@ -162,26 +179,9 @@ const sideProjects = [
       </div>
     </section>
 
-    <!-- Previous work -->
-    <section>
-      <SectionHeader id="previous-work" title="Previous work" />
-      <div class="content-grid">
-        {
-          previousWork.map((project) => (
-            <ProjectCard
-              href={project.href}
-              title={project.title}
-              role={project.role}
-              imageUrl={project.imageUrl}
-            />
-          ))
-        }
-      </div>
-    </section>
-
     <!-- Side projects -->
     <section>
-      <SectionHeader id="side-projects" title="Side projects" />
+      <SectionHeader id="side-projects" title="Citi projekti" />
       <div class="content-grid -equal">
         {
           sideProjects.map((project) => (

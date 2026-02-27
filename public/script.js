@@ -1,34 +1,3 @@
-// ===== Theme Toggle =====
-(function () {
-  const getThemePreference = () => {
-    const stored = sessionStorage.getItem("theme");
-    if (stored) return stored;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  };
-
-  const applyTheme = (theme) => {
-    document.documentElement.classList.remove("light", "dark");
-    document.documentElement.classList.add(theme);
-    sessionStorage.setItem("theme", theme);
-  };
-
-  // Apply on load
-  applyTheme(getThemePreference());
-
-  // Toggle button
-  const themeToggle = document.querySelector("[data-js-theme-toggle]");
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      const current = document.documentElement.classList.contains("dark")
-        ? "dark"
-        : "light";
-      applyTheme(current === "dark" ? "light" : "dark");
-    });
-  }
-})();
-
 // ===== Mobile Navigation =====
 (function () {
   const toggleNavContainer = document.querySelector(

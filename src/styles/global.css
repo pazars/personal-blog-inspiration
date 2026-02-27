@@ -125,45 +125,6 @@
   img {
     filter: brightness(0.9) contrast(1.2);
   }
-  html.light {
-    --color-fg-default: #090e24;
-    --color-fg-soft: #d0d1d1;
-    --color-bg-default: #ffffff;
-    --color-bg-inverse: var(--color-fg-default);
-    --color-bg-inverse-subtle: #555560;
-    --color-bg-subtle: #f6f7f9;
-    --color-bg-emphasis: rgb(241, 242, 246);
-    --color-line-default: #e6e7e7;
-    --color-line-emphasis: #757676;
-    --color-border-default: #e7eaf1;
-    --color-border-subtle: rgba(0, 0, 0, 0.075);
-    --color-border-soft: rgba(222, 222, 222, 0.22);
-    --color-border-onOff: rgba(0, 0, 0, 0.075);
-    --shadow-avatar: 0 0 0 1px rgba(31, 35, 40, 0.15);
-  }
-  html.light img {
-    filter: brightness(1) contrast(1);
-  }
-}
-
-html.dark {
-  --color-fg-default: #e2e8f0;
-  --color-fg-soft: #3c3d3d;
-  --color-bg-default: #121212;
-  --color-bg-inverse: #303036;
-  --color-bg-inverse-subtle: #414149;
-  --color-bg-subtle: #1c1c1c;
-  --color-bg-emphasis: #1f1f22;
-  --color-line-default: rgba(255, 255, 255, 0.204);
-  --color-line-emphasis: rgba(255, 255, 255, 0.392);
-  --color-border-default: rgba(255, 255, 255, 0.141);
-  --color-border-subtle: rgba(255, 255, 255, 0.086);
-  --color-border-soft: rgba(255, 255, 255, 0.071);
-  --color-border-onOff: rgba(255, 255, 255, 0.031);
-  --shadow-avatar: 0 0 0 1px rgba(255, 255, 255, 0.2);
-}
-html.dark img {
-  filter: brightness(0.9) contrast(1.2);
 }
 
 /* ===== Base Styles ===== */
@@ -539,9 +500,6 @@ header > .brand > .wrapper:active > .image-container {
     flex: 1;
   }
 
-  header:has(.input:checked) .theme-toggle {
-    display: none;
-  }
 
   header:has(.input:checked) .toggle-nav {
     width: 100%;
@@ -1092,33 +1050,6 @@ footer a:hover {
   text-decoration-color: var(--color-line-emphasis);
 }
 
-/* ===== Theme Toggle ===== */
-.theme-toggle .sun-icon {
-  display: flex;
-}
-.theme-toggle .moon-icon {
-  display: none;
-}
-html.dark .theme-toggle .sun-icon {
-  display: none;
-}
-html.dark .theme-toggle .moon-icon {
-  display: flex;
-}
-@media (prefers-color-scheme: dark) {
-  .theme-toggle .sun-icon {
-    display: none;
-  }
-  .theme-toggle .moon-icon {
-    display: flex;
-  }
-  html.light .theme-toggle .sun-icon {
-    display: flex;
-  }
-  html.light .theme-toggle .moon-icon {
-    display: none;
-  }
-}
 
 /* ===== Newsletter Form ===== */
 .newsletter-form {

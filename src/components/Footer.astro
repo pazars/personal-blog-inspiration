@@ -7,11 +7,9 @@ interface Props {
 const {
   email,
   socials = [
-    { label: "Mail", href: `mailto:${email}` },
-    { label: "Twitter (X)", href: "#" },
-    { label: "LinkedIn", href: "#" },
-    { label: "GitHub", href: "#" },
-    { label: "CodePen", href: "#" },
+    { label: "Youtube", href: "https://www.youtube.com/@dpazars" },
+    { label: "Instagram", href: "https://www.instagram.com/pazars/" },
+    { label: "Github", href: "https://github.com/Pazars/" },
   ],
 } = Astro.props;
 ---
@@ -20,15 +18,30 @@ const {
   <div class="line border-top"></div>
   <div class="container color-fg-muted text-small pt-7">
     <div class="flex-1 d-flex flex-items-start">
-      <span>&copy; {new Date().getFullYear()} Jane Doe</span>
+      <span>Uzdrīksties sev noticēt</span>
     </div>
     <div class="d-flex flex-column gap-1 mr-2 mr-md-6">
       {
         socials.map((social) => (
           <div class="item d-flex flex-items-center gap-1">
-            <a href={social.href} rel="noopener noreferrer">
+            <a href={social.href} target="_blank" rel="noopener noreferrer">
               {social.label}
             </a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="trailingIcon"
+            >
+              <path d="M7 7h10v10"></path>
+              <path d="M7 17 17 7"></path>
+            </svg>
           </div>
         ))
       }
@@ -43,28 +56,10 @@ const {
       <div class="item d-flex flex-items-center gap-1">
         <a href="/contact" rel="noopener noreferrer">Contact</a>
       </div>
-      <div class="item d-flex flex-items-center gap-1">
-        <a href="/subscribe" rel="noopener noreferrer">Subscribe</a>
-      </div>
     </div>
     <div class="mr-2 mr-md-6">
       <div class="d-flex flex-items-center gap-1">
-        <a href="#">Feedback</a>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="trailingIcon"
-        >
-          <path d="M7 7h10v10"></path>
-          <path d="M7 17 17 7"></path>
-        </svg>
+        <a href="/subscribe">Subscribe</a>
       </div>
     </div>
   </div>

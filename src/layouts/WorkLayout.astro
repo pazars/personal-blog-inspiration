@@ -21,12 +21,7 @@ interface Props {
   seeAlso?: SeeAlsoItem[];
 }
 
-const site = {
-  name: "Jane Doe",
-  role: "Creative technologist",
-  company: "Acme Labs",
-  email: "jane@example.com",
-};
+import { site } from "../site.config";
 
 const { title, role, heroImage, heroImageAlt = title, seeAlso = [] } =
   Astro.props;

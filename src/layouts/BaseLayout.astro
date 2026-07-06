@@ -15,6 +15,13 @@ interface Props {
   imageAlt?: string;
   /** og:type — pages (e.g. blog posts) can pass "article". */
   type?: string;
+  /**
+   * Keep the page out of search results (utility pages like the newsletter
+   * confirm/unsubscribe landings). Pair with the sitemap exclusion in
+   * astro.config.mjs — noindex'ing a page that the sitemap still advertises
+   * sends crawlers contradictory signals.
+   */
+  noindex?: boolean;
 }
 
 const {
@@ -23,6 +30,7 @@ const {
   image = "/og-image.jpg",
   imageAlt,
   type = "website",
+  noindex = false,
 } = Astro.props;
 
 // Branded, unique-per-page <title> (shared with og:/twitter:title below).
@@ -67,6 +75,7 @@ import "../styles/global.css";
     <!-- Primary meta tags -->
     <title>{fullTitle}</title>
     <meta name="title" content={fullTitle} />
+    {noindex && <meta name="robots" content="noindex" />}
     <meta name="description" content={description} />
 
     <!-- Open Graph / Facebook -->

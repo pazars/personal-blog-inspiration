@@ -16,6 +16,12 @@ interface Props {
   /** og:type — pages (e.g. blog posts) can pass "article". */
   type?: string;
   /**
+   * ISO publish date (e.g. "2026-06-22") for pages with type="article"; feeds
+   * the article:published_time OG tag and the BlogPosting JSON-LD, which is
+   * what gets a post treated as a dated article in search results.
+   */
+  publishedTime?: string;
+  /**
    * Keep the page out of search results (utility pages like the newsletter
    * confirm/unsubscribe landings). Pair with the sitemap exclusion in
    * astro.config.mjs — noindex'ing a page that the sitemap still advertises
@@ -30,6 +36,7 @@ const {
   image = "/og-image.jpg",
   imageAlt,
   type = "website",
+  publishedTime,
   noindex = false,
 } = Astro.props;
 
@@ -40,7 +47,9 @@ const fullTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 
-// Site-wide structured data: who the author is and what the site is.
+// Site-wide structured data: who the author is and what the site is. Articles
+// additionally get a BlogPosting node (headline stays the bare page title —
+// no "— <site.name>" suffix, which is branding, not the headline).
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -57,6 +66,20 @@ const jsonLd = {
       url: site.url,
       inLanguage: "lv",
     },
+    ...(type === "article"
+      ? [
+          {
+            "@type": "BlogPosting",
+            headline: title,
+            description,
+            image: ogImage.toString(),
+            ...(publishedTime && { datePublished: publishedTime }),
+            author: { "@type": "Person", name: site.name, url: site.url },
+            inLanguage: "lv",
+            mainEntityOfPage: canonical.toString(),
+          },
+        ]
+      : []),
   ],
 };
 
@@ -93,6 +116,10 @@ import "../styles/global.css";
     {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
     <meta property="og:site_name" content={site.name} />
     <meta property="og:locale" content="lv_LV" />
+    {type === "article" && publishedTime && (
+      <meta property="article:published_time" content={publishedTime} />
+    )}
+    {type === "article" && <meta property="article:author" content={site.name} />}
 
     <!-- Twitter. X's parser documents the name= attribute; property= is kept as
          a duplicate because some scrapers only read the OG-style attribute. -->

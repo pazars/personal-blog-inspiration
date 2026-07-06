@@ -7,6 +7,8 @@ interface Props {
   description?: string;
   /** Site-relative share image; resolved to an absolute URL below. */
   image?: string;
+  /** Alt text for the share image (og:image:alt / twitter:image:alt). */
+  imageAlt?: string;
   /** og:type — pages (e.g. blog posts) can pass "article". */
   type?: string;
 }
@@ -15,6 +17,7 @@ const {
   title = "Taku skriešanas blogs",
   description = "Par aktualitātēm, savu pieredzi un mācībām, kas var noderēt ikvienam.",
   image = "/og-image.jpg",
+  imageAlt,
   type = "website",
 } = Astro.props;
 
@@ -65,6 +68,13 @@ import "../styles/global.css";
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    {/* Every share image is 1200x630: the default public/og-image.jpg is authored
+        at that size and ogShareImage() (src/utils/postImages.ts) crops to it.
+        Declaring the dimensions lets scrapers render the card on first share,
+        before they have fetched the image. */}
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
     <meta property="og:site_name" content={site.name} />
     <meta property="og:locale" content="lv_LV" />
 
@@ -75,6 +85,9 @@ import "../styles/global.css";
     <meta property="twitter:title" content={title} name="twitter:title" />
     <meta property="twitter:description" content={description} name="twitter:description" />
     <meta property="twitter:image" content={ogImage} name="twitter:image" />
+    {imageAlt && (
+      <meta property="twitter:image:alt" content={imageAlt} name="twitter:image:alt" />
+    )}
 
     <!-- Icons & PWA manifest. The icons are circular crops of the Gravatar
          profile picture (a favicon can't be CSS-rounded, so it's pre-rendered);

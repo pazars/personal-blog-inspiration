@@ -1,6 +1,9 @@
 export const site = {
   name: "Dāvis Pazars",
   role: "Taku skrējējs, programmētājs",
+  // Site tagline — the home-page <title> ("<name> — <tagline>") and the RSS
+  // channel title are built from it.
+  tagline: "Taku skriešanas blogs",
   // Canonical origin (no trailing slash). Used for canonical/OG URLs and the sitemap.
   url: "https://davispazars.lv",
   company: "",

@@ -2,7 +2,11 @@
 import { site } from "../site.config";
 
 interface Props {
-  /** Tab/OG title. Defaults to the site-wide title; blog posts pass their own. */
+  /**
+   * Page-specific title, rendered as "<title> — <site.name>". When omitted
+   * (the home page), the site-wide "<site.name> — <site.tagline>" is used.
+   * Every page should pass one — duplicate <title>s hurt search ranking.
+   */
   title?: string;
   description?: string;
   /** Site-relative share image; resolved to an absolute URL below. */
@@ -14,12 +18,15 @@ interface Props {
 }
 
 const {
-  title = "Taku skriešanas blogs",
+  title,
   description = "Par aktualitātēm, savu pieredzi un mācībām, kas var noderēt ikvienam.",
   image = "/og-image.jpg",
   imageAlt,
   type = "website",
 } = Astro.props;
+
+// Branded, unique-per-page <title> (shared with og:/twitter:title below).
+const fullTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.tagline}`;
 
 // Absolute URLs for canonical + social metadata (Astro.site comes from astro.config).
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -58,14 +65,14 @@ import "../styles/global.css";
     <link rel="canonical" href={canonical} />
 
     <!-- Primary meta tags -->
-    <title>{title}</title>
-    <meta name="title" content={title} />
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
     <meta name="description" content={description} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     {/* Every share image is 1200x630: the default public/og-image.jpg is authored
@@ -82,7 +89,7 @@ import "../styles/global.css";
          a duplicate because some scrapers only read the OG-style attribute. -->
     <meta property="twitter:card" content="summary_large_image" name="twitter:card" />
     <meta property="twitter:url" content={canonical} name="twitter:url" />
-    <meta property="twitter:title" content={title} name="twitter:title" />
+    <meta property="twitter:title" content={fullTitle} name="twitter:title" />
     <meta property="twitter:description" content={description} name="twitter:description" />
     <meta property="twitter:image" content={ogImage} name="twitter:image" />
     {imageAlt && (

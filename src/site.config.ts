@@ -4,6 +4,10 @@ export const site = {
   // Site tagline — the home-page <title> ("<name> — <tagline>") and the RSS
   // channel title are built from it.
   tagline: "Taku skriešanas blogs",
+  // What the blog is about — shared by the /blogs listing meta description and
+  // the RSS channel <description>, so the wording stays in one place.
+  blogDescription:
+    "Visi raksti par treniņiem, sacensību atskatiem un to, kā paņemt mācības no sporta pārējai dzīvei.",
   // Canonical origin (no trailing slash). Used for canonical/OG URLs and the sitemap.
   url: "https://davispazars.lv",
   company: "",

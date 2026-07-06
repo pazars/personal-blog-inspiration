@@ -20,6 +20,16 @@ export default defineConfig({
       // prop) and are dropped here too, so the sitemap and robots meta agree.
       // /vestkopa itself (the sign-up page) stays indexed.
       filter: (page) => !/\/vestkopa\/.+/.test(page),
+      // lastmod re-crawl hint for blog posts. The publish date is already a URL
+      // segment (/blogs/<YYYY-MM-DD>/<slug>/ — see src/pages/blogs/[...slug].astro),
+      // so it can be read back here without loading the content collection
+      // (astro:content isn't available in config). Non-post pages carry no
+      // lastmod rather than a fake one.
+      serialize: (item) => {
+        const date = item.url.match(/\/blogs\/(\d{4}-\d{2}-\d{2})\//)?.[1];
+        if (date) item.lastmod = date;
+        return item;
+      },
     }),
   ],
   // Responsive images (stable in Astro 6): Markdown images now emit a srcset of

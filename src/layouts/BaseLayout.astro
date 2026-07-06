@@ -68,12 +68,13 @@ import "../styles/global.css";
     <meta property="og:site_name" content={site.name} />
     <meta property="og:locale" content="lv_LV" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonical} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={ogImage} />
+    <!-- Twitter. X's parser documents the name= attribute; property= is kept as
+         a duplicate because some scrapers only read the OG-style attribute. -->
+    <meta property="twitter:card" content="summary_large_image" name="twitter:card" />
+    <meta property="twitter:url" content={canonical} name="twitter:url" />
+    <meta property="twitter:title" content={title} name="twitter:title" />
+    <meta property="twitter:description" content={description} name="twitter:description" />
+    <meta property="twitter:image" content={ogImage} name="twitter:image" />
 
     <!-- Icons & PWA manifest. The icons are circular crops of the Gravatar
          profile picture (a favicon can't be CSS-rounded, so it's pre-rendered);

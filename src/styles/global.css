@@ -552,6 +552,57 @@ nav > .link.active {
   }
 }
 
+/* ===== Language Switcher ===== */
+/* A miniature segmented control: a quiet track holding two equal cells, the
+   active one raised on a bg-default "thumb" — the same treatment the active
+   nav pill gets inside the open mobile menu, one size down. The size step is
+   deliberate: this is a control (current state + affordance), not a
+   destination, and shrinking it is what keeps LV|EN from reading as two more
+   nav links. State is carried by text color (muted → default) plus the thumb;
+   hover only darkens the label so nothing competes with the thumb. */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--border-radius-lg);
+}
+.lang-switch > .cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Equal cells, so the control's width never shifts when the active side
+     changes between pages. */
+  min-width: 32px;
+  /* Same optical trick as the nav pills: uneven vertical padding nudges the
+     cap-height-only label back to true center. */
+  padding: 6px 8px 5px;
+  font-size: var(--text-body-size-extra-small);
+  font-weight: var(--font-weight-medium);
+  /* Two-letter codes are set a touch open so they read as labels, not words. */
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--color-fg-muted);
+  border-radius: var(--border-radius-lg);
+  text-decoration: none;
+}
+.lang-switch > .cell:hover {
+  color: var(--color-fg-default);
+}
+.lang-switch > .cell.active {
+  color: var(--color-fg-default);
+  background-color: var(--color-bg-default);
+  /* Ring instead of a border so the active cell keeps the same box size as
+     the inactive one — no 1px wobble when the active side changes. The ring
+     is what articulates the thumb in dark mode, where bg-default sits darker
+     than the track and the drop shadow disappears. */
+  box-shadow:
+    0 0 0 1px var(--color-border-subtle),
+    var(--tw-shadow);
+}
+
 /* ===== Toggle Nav (Mobile) ===== */
 @keyframes stack-to-left {
   0% {
@@ -591,6 +642,11 @@ nav > .link.active {
 .toggle-nav > .input:checked ~ .menu {
   display: flex;
   justify-content: flex-end;
+  /* Three Latvian nav labels already fill the open row at 360px wide, so the
+     language switcher wraps to its own right-aligned second line inside the
+     open card. Deliberate, not overflow — do not try to squeeze it inline. */
+  flex-wrap: wrap;
+  row-gap: 6px;
   width: 100%;
 }
 .toggle-nav > .input:checked ~ .menu > nav > .link {
@@ -608,9 +664,41 @@ nav > .link.active {
 .toggle-nav > .input:checked ~ .menu > nav > .link:nth-child(1) {
   animation-delay: 0.05s;
 }
+/* The switcher is the cascade's last beat: the nav links sweep right-to-left
+   (0.02–0.05s above), then the second line settles. */
+.toggle-nav > .input:checked ~ .menu > .lang-switch {
+  animation: 0.3s stack-to-left var(--snappy-animation);
+  animation-fill-mode: forwards;
+  animation-delay: 0.06s;
+  transform: translate(12px);
+  opacity: 0;
+  /* Inside the open card the track's outline would double the card's own
+     enclosure, so the border yields to a soft well: one step darker than the
+     card (bg-emphasis over bg-subtle) keeps LV|EN reading as a single control,
+     distinct from the route pills, without drawing a second box. On the white
+     page background (desktop row) the bordered track above still applies. */
+  border-color: transparent;
+  background-color: var(--color-bg-emphasis);
+}
+/* The cascade parks items at opacity 0 and animates them in, so killing the
+   animation alone would leave the menu invisible — the base state must be
+   reset alongside it. */
+@media (prefers-reduced-motion: reduce) {
+  .toggle-nav > .input ~ .menu,
+  .toggle-nav > .input:checked ~ .menu > nav > .link,
+  .toggle-nav > .input:checked ~ .menu > .lang-switch {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
 @media (min-width: 544px) {
+  /* One row, never two: nav pills and the language switcher share a single
+     flex line, which is what keeps the switcher from wrapping under the nav. */
   .toggle-nav > .input ~ .menu {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 12px;
     margin: 0;
     background-color: var(--color-bg-default);
     width: auto;

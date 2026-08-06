@@ -13,15 +13,15 @@ import type { ImageMetadata } from "astro";
  * components keep taking a string `imageUrl`.
  */
 export async function cardThumbnail(src: ImageMetadata): Promise<string> {
-  // layout: "none" opts out of the global `constrained` layout — we use only
+  // layout: "none" opts out of the global `constrained` layout - we use only
   // `.src` here, so generating a full responsive srcset would be wasted files.
   const img = await getImage({ src, width: 1110, format: "webp", layout: "none" });
   return img.src;
 }
 
 /**
- * Open Graph share image: a dedicated 1200×630 JPEG — the size and format link
- * scrapers (Facebook, LinkedIn, Slack, …) handle most reliably — returned as an
+ * Open Graph share image: a dedicated 1200×630 JPEG - the size and format link
+ * scrapers (Facebook, LinkedIn, Slack, …) handle most reliably - returned as an
  * absolute URL built from `Astro.site` so crawlers can fetch it. `fit: "cover"`
  * crops to the OG aspect ratio instead of distorting.
  */

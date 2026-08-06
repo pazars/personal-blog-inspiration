@@ -6,7 +6,7 @@ Reference for reproducing the visual aesthetic of this personal portfolio/blog. 
 
 ## Overall Aesthetic
 
-**Minimal, editorial, professional.** The site feels like a well-designed portfolio from someone who cares about craft — not flashy, not sterile. It uses generous whitespace, restrained color, and quiet interaction details. Think: a designer's personal site that lets the work speak for itself.
+**Minimal, editorial, professional.** The site feels like a well-designed portfolio from someone who cares about craft - not flashy, not sterile. It uses generous whitespace, restrained color, and quiet interaction details. Think: a designer's personal site that lets the work speak for itself.
 
 Key adjectives: **clean, understated, typographic, spacious, warm-neutral, intentional.**
 
@@ -14,7 +14,7 @@ Key adjectives: **clean, understated, typographic, spacious, warm-neutral, inten
 
 ## Color Philosophy
 
-Two-tone foundation with a single accent. The palette is almost monochromatic — deep navy text on white, with one saturated blue for emphasis. Gray scale handles hierarchy. No gradients, no decorative color.
+Two-tone foundation with a single accent. The palette is almost monochromatic - deep navy text on white, with one saturated blue for emphasis. Gray scale handles hierarchy. No gradients, no decorative color.
 
 ### Light Mode
 
@@ -52,7 +52,7 @@ Images get `filter: brightness(0.9) contrast(1.2)` in dark mode.
 
 ## Typography
 
-System font stack — no custom fonts. Relies on weight, size, and spacing for hierarchy.
+System font stack - no custom fonts. Relies on weight, size, and spacing for hierarchy.
 
 ```
 --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
@@ -65,12 +65,12 @@ System font stack — no custom fonts. Relies on weight, size, and spacing for h
 |----------------|----------|----------|--------|----------------|-------------|
 | h1             | 24px     | 28px     | 600    | -0.03em        | 1.25        |
 | h2             | 20px     | 24px     | 600    | -0.03em        | 1.25        |
-| h3             | 18px     | 20px     | 400*   | —              | —           |
-| Body           | 14px     | 16px     | 400    | —              | 1.6         |
-| Body large     | —        | 18px     | —      | —              | —           |
-| Extra large    | 22px     | 24px     | —      | —              | 1.3–1.4     |
-| Small          | 14px     | 14px     | —      | —              | —           |
-| Extra small    | 12px     | 12px     | —      | —              | —           |
+| h3             | 18px     | 20px     | 400*   | -              | -           |
+| Body           | 14px     | 16px     | 400    | -              | 1.6         |
+| Body large     | -        | 18px     | -      | -              | -           |
+| Extra large    | 22px     | 24px     | -      | -              | 1.3–1.4     |
+| Small          | 14px     | 14px     | -      | -              | -           |
+| Extra small    | 12px     | 12px     | -      | -              | -           |
 
 *h3 becomes `font-weight: 600` when followed by a description element.
 
@@ -86,9 +86,9 @@ System font stack — no custom fonts. Relies on weight, size, and spacing for h
 ### Key typographic details
 
 - **Headings** use tight negative letter-spacing (`-0.03em`) for a crisp, editorial feel.
-- **Section headers** (e.g. "Recent ships") are small, muted, medium-weight — label-like, not shouty.
-- **Body text** is 1.6 line-height — generous, readable, relaxed.
-- **Blockquotes** use the extra-large size (22–24px) with no border or background — just bigger text. Minimal, quote-as-emphasis style.
+- **Section headers** (e.g. "Recent ships") are small, muted, medium-weight - label-like, not shouty.
+- **Body text** is 1.6 line-height - generous, readable, relaxed.
+- **Blockquotes** use the extra-large size (22–24px) with no border or background - just bigger text. Minimal, quote-as-emphasis style.
 - **All text** gets `-webkit-font-smoothing: antialiased` for crisp rendering.
 
 ---
@@ -117,7 +117,7 @@ Grid row gap: `32px`. Grid column gap: `16px`.
 - Tablet (768px+): `64em` (~1024px)
 - Desktop (1012px+): `60em` (~960px)
 
-The content column is narrower than you'd expect — it reads like a centered editorial column, not a full-bleed layout.
+The content column is narrower than you'd expect - it reads like a centered editorial column, not a full-bleed layout.
 
 ---
 
@@ -131,7 +131,7 @@ The content column is narrower than you'd expect — it reads like a centered ed
 | `--border-radius`    | 6px   | Buttons, dropdown items       |
 | `--border-width`     | 1.5px | Dividers, top borders         |
 
-Borders are very subtle — `rgba(0, 0, 0, 0.075)` in light mode, `rgba(255, 255, 255, 0.086)` in dark. You should barely notice them. They define edges without drawing attention.
+Borders are very subtle - `rgba(0, 0, 0, 0.075)` in light mode, `rgba(255, 255, 255, 0.086)` in dark. You should barely notice them. They define edges without drawing attention.
 
 ---
 
@@ -139,10 +139,10 @@ Borders are very subtle — `rgba(0, 0, 0, 0.075)` in light mode, `rgba(255, 255
 
 Shadows are minimal and functional, never decorative:
 
-- **Cards/dropdowns**: `0 4px 8px #424a5308` — barely visible, just enough depth.
+- **Cards/dropdowns**: `0 4px 8px #424a5308` - barely visible, just enough depth.
 - **General shadow**: `0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)`
 - **Active nav pill**: Uses the general shadow for a subtle raised effect.
-- **Avatar**: `0 0 0 1px rgba(31, 35, 40, 0.15)` — a ring, not a drop shadow.
+- **Avatar**: `0 0 0 1px rgba(31, 35, 40, 0.15)` - a ring, not a drop shadow.
 
 ---
 
@@ -163,7 +163,7 @@ Small, muted, label-like. Format: "Recent ships", "Previous work", "Experience".
 
 - Vertical layout: image on top, title + role below.
 - Image has `border-radius: 12px` and sits inside an overflow-hidden wrapper.
-- On hover, the image wrapper scales to `0.98` with a `0.2s` transition — a subtle "press" effect.
+- On hover, the image wrapper scales to `0.98` with a `0.2s` transition - a subtle "press" effect.
 - Title is `font-weight: 600`, description is `font-size: 14px` in muted color.
 - External link indicator: a small diagonal arrow icon (↗) in muted color, right-aligned.
 - Side project variant: image sits on a colored background pad (`padding: 16px 16px 0`).
@@ -181,7 +181,7 @@ Small, muted, label-like. Format: "Recent ships", "Previous work", "Experience".
 - Full-width rows with `background-color: --color-bg-subtle` and `border-radius: 12px`.
 - `padding: 16px`, gap `8px` between items.
 - Content left (title, optional description), trailing right (date range or external link icon).
-- Hover: background shifts to `--color-bg-emphasis` — only for items that are links.
+- Hover: background shifts to `--color-bg-emphasis` - only for items that are links.
 - Title is body-size by default, becomes `font-weight: 600` when a description is present.
 
 ### Buttons
@@ -206,7 +206,7 @@ Small, muted, label-like. Format: "Recent ships", "Previous work", "Experience".
 
 ### Footer
 
-- Large top margin (`120px`) — lots of breathing room before the footer.
+- Large top margin (`120px`) - lots of breathing room before the footer.
 - Grid layout: copyright left, nav links + socials in columns to the right.
 - Links are muted, underline on hover.
 
@@ -214,7 +214,7 @@ Small, muted, label-like. Format: "Recent ships", "Previous work", "Experience".
 
 ## Interactions & Animation
 
-Interactions are **quiet and responsive** — they confirm user actions without being distracting.
+Interactions are **quiet and responsive** - they confirm user actions without being distracting.
 
 | Interaction          | Effect                                      | Duration/Easing                          |
 |----------------------|----------------------------------------------|------------------------------------------|
@@ -227,7 +227,7 @@ Interactions are **quiet and responsive** — they confirm user actions without 
 | Pulsing dot          | Scale 0.9→1 + expanding shadow ring          | `3s infinite`                            |
 | Link underline hover | Underline color darkens                      | Instant                                  |
 
-The snappy mobile nav easing (`cubic-bezier(0.33, 1.6, 0.66, 1)`) overshoots slightly — it's bouncy without being playful. Nav links stagger in at 0.02–0.05s delays for a cascading reveal.
+The snappy mobile nav easing (`cubic-bezier(0.33, 1.6, 0.66, 1)`) overshoots slightly - it's bouncy without being playful. Nav links stagger in at 0.02–0.05s delays for a cascading reveal.
 
 ---
 
@@ -240,7 +240,7 @@ The snappy mobile nav easing (`cubic-bezier(0.33, 1.6, 0.66, 1)`) overshoots sli
 | Medium     | 768px   | Body text 16px, body padding 60px, max-width 64em     |
 | Large      | 1012px  | Max-width 60em, body padding 80px, section header anchor icons visible |
 
-Mobile-first approach. The design is complete and usable at mobile — desktop adds space and polish, not new features.
+Mobile-first approach. The design is complete and usable at mobile - desktop adds space and polish, not new features.
 
 ---
 
@@ -248,9 +248,9 @@ Mobile-first approach. The design is complete and usable at mobile — desktop a
 
 - Inherit text color (not blue).
 - Underline with `text-decoration-color: --color-line-default` (very light).
-- `text-underline-offset: 0.25em` — the underline sits slightly below, not touching descenders.
+- `text-underline-offset: 0.25em` - the underline sits slightly below, not touching descenders.
 - On hover: underline darkens to `--color-line-emphasis`.
-- Navigation links and card links have **no underline** — they use background color changes instead.
+- Navigation links and card links have **no underline** - they use background color changes instead.
 
 ---
 
@@ -262,7 +262,7 @@ All icons are inline SVGs from Lucide (16x16 viewBox, `stroke-width: 2`, `stroke
 - **Close**: X mark
 - **Email**: envelope with letter line
 - **Sun/Moon**: theme toggle
-- **External link**: diagonal arrow (↗) — `path d="M7 7h10v10"` + `path d="M7 17 17 7"`
+- **External link**: diagonal arrow (↗) - `path d="M7 7h10v10"` + `path d="M7 17 17 7"`
 - **Anchor link**: link/chain icon for section headers
 
 Icons are always `currentColor` for automatic theme adaptation. Trailing external-link arrows are `14x14px` and use `--color-fg-muted`.
@@ -273,9 +273,9 @@ Icons are always `currentColor` for automatic theme adaptation. Trailing externa
 
 Dual approach: respects `prefers-color-scheme: dark` media query AND supports manual toggle via `.light`/`.dark` classes on `<html>`. Theme persisted in `localStorage`. Classes override the media query.
 
-Dark mode is not an inversion — it's a considered remap:
+Dark mode is not an inversion - it's a considered remap:
 - Background goes near-black (`#121212`), not gray.
-- Text becomes `#e2e8f0`, not pure white — easier on the eyes.
+- Text becomes `#e2e8f0`, not pure white - easier on the eyes.
 - Borders switch to white with low opacity (RGBA) for natural blending.
 - Images get slightly dimmed (`brightness(0.9)`) and sharpened (`contrast(1.2)`).
 
@@ -286,7 +286,7 @@ Dark mode is not an inversion — it's a considered remap:
 1. **Content over chrome.** No decorative elements. Every visual element serves information hierarchy.
 2. **Whitespace is structural.** Generous padding and margins create rhythm and group content.
 3. **Interactions confirm, not entertain.** Hover/press states are subtle acknowledgments, not animations.
-4. **Typography does the heavy lifting.** Size, weight, and color create hierarchy — not borders, backgrounds, or icons.
+4. **Typography does the heavy lifting.** Size, weight, and color create hierarchy - not borders, backgrounds, or icons.
 5. **Cards are quiet containers.** Subtle background (`--color-bg-subtle`), gentle radius, no loud shadows or borders.
-6. **Mobile is complete, desktop adds breathing room.** The same content, same hierarchy — just more space.
+6. **Mobile is complete, desktop adds breathing room.** The same content, same hierarchy - just more space.
 7. **One accent color.** Blue (`#283cff`) is used sparingly for emphasis. Green only for the "active" dot.

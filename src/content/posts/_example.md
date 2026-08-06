@@ -13,7 +13,7 @@ thumbnailAlt: "Eu anim dolor consectetur" # TODO: real alt text
 thumbnailAttribution: "Foto: Eu irure" # TODO: real photo credit (omit if none)
 ---
 
-<!-- TODO: all body copy below is lorem-ipsum placeholder — replace with the real article. -->
+<!-- TODO: all body copy below is lorem-ipsum placeholder - replace with the real article. -->
 
 Nostrud do deserunt ipsum ad nisi deserunt culpa consectetur. Dolor velit aliqua eiusmod laborum quis ut minim. Ad dolore quis voluptate ex anim culpa excepteur ut. Ut commodo mollit id duis. Eiusmod laborum consectetur nisi ea nostrud non ex aliquip eiusmod reprehenderit.
 

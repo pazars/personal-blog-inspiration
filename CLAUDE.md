@@ -198,7 +198,10 @@ to `/` alone also means **no `_routes.json` is needed**.
   don't. Use the latter for long explanatory notes.
 - `/iesaku` has a "Valoda" dropdown that filters by the language of the
   *recommended item*, which is orthogonal to the UI locale. It uses
-  `data-js-lang`; the site switcher uses `data-js-lang-pick`. Don't conflate them.
+  `data-js-lang`; the site switcher uses `data-js-lang-pick`. Don't conflate
+  them. The dropdown exists only where there is a choice: the Latvian page
+  lists items in both languages, while `/en/recommendations` pre-filters to
+  English-language items and renders no dropdown.
 - The mobile nav open animation staggers `nav > .link:nth-child(1..3)` by hand,
   so the switcher sits **outside** `<nav>` inside `.menu`. Adding a fourth nav
   link needs a matching `:nth-child(4)` rule.

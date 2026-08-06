@@ -12,7 +12,7 @@ import RecommendationCard from "../RecommendationCard.astro";
 import Footer from "../Footer.astro";
 import { getCollection } from "astro:content";
 import { fetchOgImage } from "../../utils/ogImage";
-import { LOCALES, type Locale } from "../../i18n";
+import { DEFAULT_LOCALE, LOCALES, type Locale } from "../../i18n";
 import { sectionAlternates } from "../../i18n/routes";
 import { useTranslations } from "../../i18n/ui";
 import { capitalize, compare } from "../../i18n/collate";
@@ -30,14 +30,22 @@ const byTitle = compare(lang);
 // carries its tags + language in data-* attributes so the scoped script below
 // can filter entirely on the client (mirrors the blog list; the dropdown
 // filters by language instead of sorting).
-const items = (await getCollection("recommendations", ({ data }) => !data.draft)).sort(
-  (a, b) => byTitle(a.data.title, b.data.title),
-);
+//
+// The list itself is locale-aware: the Latvian page offers everything (its
+// readers understand both languages, so the dropdown gives them the choice),
+// while a non-default locale only gets items in its own language - an English
+// reader can't use a Latvian podcast, and a filter would merely reveal cards
+// it then has to hide.
+const items = (await getCollection("recommendations", ({ data }) => !data.draft))
+  .filter((item) => lang === DEFAULT_LOCALE || item.data.language === lang)
+  .sort((a, b) => byTitle(a.data.title, b.data.title));
 
 const allTags = [...new Set(items.flatMap((p) => p.data.tags))].sort(byTitle);
 
-// Only item languages actually present in the content get an option (plus the
-// "all" default). Labels are localised into the current UI language.
+// Only item languages actually present in the (locale-filtered) list get an
+// option, and the dropdown renders only when there is a real choice - on the
+// English page every item is English, so no filter appears at all. Labels are
+// localised into the current UI language.
 const languages = LOCALES.filter((code) =>
   items.some((p) => p.data.language === code),
 );
@@ -103,7 +111,7 @@ const thumbnails = await Promise.all(
         </div>
 
         {
-          languages.length > 0 && (
+          languages.length > 1 && (
             <div class="blog-selects">
               <label class="blog-select-label">
                 <span class="sr-only">{t("recs.languageLabel")}</span>

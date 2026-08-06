@@ -1,9 +1,10 @@
 ---
 // Shared body of the achievements page (/sasniegumi, /en/achievements).
 //
-// The race results themselves are locale-invariant data (src/data/races.ts) -
-// event names and measurements aren't translated - so both locales render the
-// same array. Only the headings and the intro prose come from the dictionary.
+// Both locales render the same race array (src/data/races.ts): measurements
+// are locale-invariant, and an event title resolves through localize() so an
+// entry may carry a per-locale name. Headings and intro prose come from the
+// dictionary.
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../Header.astro";
 import SectionHeader from "../SectionHeader.astro";
@@ -12,6 +13,7 @@ import Footer from "../Footer.astro";
 import { site } from "../../site.config";
 import { trailRunning, roadRunning, cycling } from "../../data/races";
 import type { Locale } from "../../i18n";
+import { localize } from "../../i18n/localized";
 import { sectionAlternates } from "../../i18n/routes";
 import { useTranslations } from "../../i18n/ui";
 
@@ -70,7 +72,7 @@ const disciplines = [
           <div class="list-container">
             {discipline.items.map((item) => (
               <ListItem
-                title={item.title}
+                title={localize(lang, item.title)}
                 description={item.description}
                 trailing={item.trailing}
               />

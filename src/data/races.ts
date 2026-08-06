@@ -1,16 +1,20 @@
-// Race results, by discipline.
+// Race results, by discipline. Both locales' achievements pages render this
+// same array, so a new result is added once.
 //
-// Locale-INVARIANT on purpose: every value here is a proper noun (event name) or
-// a measurement ("42km · 2200m · 04:19:22"), none of which is translated. Both
-// the Latvian and English achievements pages render this same array, so a new
-// result is added once. Only the section headings and the intro prose are
-// per-locale, and those live in src/i18n/ui.ts.
+// `title` is the event, `description` is distance/elevation/time, `trailing`
+// is the year. Medal emoji in the title mark a podium finish.
 //
-// `title` is the event, `description` is distance/elevation/time, `trailing` is
-// the year. Medal emoji in the title mark a podium finish.
+// Measurements and years are locale-invariant and stay plain strings. An
+// event NAME may be localized with the map form when its translation is
+// worth showing, e.g.
+//   title: { lv: "Latvijas čempionāts 5km 🏆", en: "Latvian 5km championship 🏆" }
+// Whether a given event name should be translated (many are proper nouns
+// best left alone) is Dāvis's call - entries stay plain strings until then.
+
+import type { Localized } from "../i18n/localized";
 
 export interface RaceResult {
-  title: string;
+  title: Localized;
   description: string;
   trailing: string;
 }

@@ -9,7 +9,8 @@ import { cardThumbnail } from "../../utils/postImages";
 import type { Locale } from "../../i18n";
 import { postPath, sectionAlternates } from "../../i18n/routes";
 import { useTranslations } from "../../i18n/ui";
-import { capitalize, compare } from "../../i18n/collate";
+import { compare } from "../../i18n/collate";
+import { tagLabel } from "../../i18n/tags";
 import { postsFor } from "../../i18n/posts";
 
 interface Props {
@@ -33,7 +34,12 @@ const thumbnails = new Map(
   ),
 );
 
-const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort(compare(lang));
+// Chips sort by their DISPLAYED label (tags are canonical slugs, shown via
+// tagLabel), so the order stays alphabetical in the reader's language.
+const byLabel = compare(lang);
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort((a, b) =>
+  byLabel(tagLabel(lang, a), tagLabel(lang, b)),
+);
 ---
 
 <BaseLayout
@@ -60,7 +66,7 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort(compare(lan
                 data-tag={tag}
                 aria-pressed="false"
               >
-                {capitalize(lang, tag)}
+                {tagLabel(lang, tag)}
               </button>
             ))
           }

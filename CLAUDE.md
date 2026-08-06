@@ -103,6 +103,8 @@ language code or a section path:
 | `ui.ts` | the UI string dictionary + `useTranslations()` |
 | `posts.ts` | `postsFor()`, `localeOf()`, `counterpart()`, `postAlternates()`, `assertUniqueSlugs()` |
 | `collate.ts` | `compare(lang)`, `capitalize(lang, s)` - replaces hardcoded `localeCompare(…, "lv")` |
+| `localized.ts` | `Localized` (string or per-locale map), `localize()`, the `localized()` zod field - for content/data strings, with fallback to Latvian (imports zod, so NOT for Pages Functions) |
+| `tags.ts` | `TAG_LABELS` + `tagLabel()` - per-locale display names for canonical tag slugs |
 
 ### The dictionary is type-enforced - use it
 
@@ -130,6 +132,11 @@ Latvian posts sit flat in `src/content/posts/`; English ones in
 (`localeOf()`), so there is no `lang` frontmatter field to contradict. Set
 `translationKey` on the **translation** only, to the original's `slug`; the
 original defaults to its own slug. See `src/content/posts/en/_example.md`.
+
+**Tags are canonical slugs**, copied verbatim from the original to its
+translation (never translated in frontmatter), so filters and `?tag=` deep
+links behave identically in both locales. Their display names are localized in
+`src/i18n/tags.ts`; an unmapped tag falls back to its capitalized slug.
 
 An untranslated post is a **legal state**: `postAlternates()` returns a lone
 self-reference, `BaseLayout` then emits no `hreflang` at all (correct - a set of
@@ -356,8 +363,10 @@ The one exception is when the user's current request *is* the testing task
 - **Single source of truth**, split by what varies:
   `src/site.config.ts` holds only **locale-invariant** facts (name, origin,
   socials, Gravatar email). Every reader-facing **string** is in `src/i18n/ui.ts`;
-  every **URL path** is in `src/i18n/routes.ts`; locale-invariant page **data**
-  (race results, side projects) is in `src/data/`. Change copy in the dictionary,
+  every **URL path** is in `src/i18n/routes.ts`; page **data** (race results,
+  side projects) is in `src/data/` - mostly locale-invariant, with individual
+  fields typed `Localized` where a value may vary per language (resolved via
+  `localize()`, falling back to Latvian). Change copy in the dictionary,
   not in components.
 - **Dates**: never hand-write date strings. `src/utils/date.ts` derives the URL
   segment (`toIsoDate`) and the human label (`formatPostDate(date, lang)`) from the

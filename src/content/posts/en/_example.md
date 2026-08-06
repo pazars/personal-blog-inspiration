@@ -23,8 +23,10 @@ slug: "example-english-post"
 # falls back to the Latvian home page and no hreflang is emitted.
 translationKey: "vilkacu-maratons-2026"
 date: 2026-06-22
-# Tags are content, so they are written in the post's own language.
-tags: ["adipisicing elit esse", "cillum id ea"]
+# Tags are CANONICAL slugs shared across locales: copy the ORIGINAL post's
+# tags verbatim (do not translate them). Per-language display names live in
+# src/i18n/tags.ts - a new tag gets its labels there.
+tags: ["treniņi", "sacensības"]
 # Relative to THIS file - one level deeper than a Latvian post, hence ../../../
 thumbnail: "../../../assets/thumb-example.jpg"
 thumbnailAlt: "Eu anim dolor consectetur" # TODO: real alt text

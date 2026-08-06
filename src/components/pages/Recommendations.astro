@@ -13,9 +13,11 @@ import Footer from "../Footer.astro";
 import { getCollection } from "astro:content";
 import { fetchOgImage } from "../../utils/ogImage";
 import { DEFAULT_LOCALE, LOCALES, type Locale } from "../../i18n";
+import { localize } from "../../i18n/localized";
 import { sectionAlternates } from "../../i18n/routes";
+import { tagLabel } from "../../i18n/tags";
 import { useTranslations } from "../../i18n/ui";
-import { capitalize, compare } from "../../i18n/collate";
+import { compare } from "../../i18n/collate";
 
 interface Props {
   lang: Locale;
@@ -40,7 +42,11 @@ const items = (await getCollection("recommendations", ({ data }) => !data.draft)
   .filter((item) => lang === DEFAULT_LOCALE || item.data.language === lang)
   .sort((a, b) => byTitle(a.data.title, b.data.title));
 
-const allTags = [...new Set(items.flatMap((p) => p.data.tags))].sort(byTitle);
+// Chips sort by their DISPLAYED label, so the order stays alphabetical in
+// whichever language the reader sees.
+const allTags = [...new Set(items.flatMap((p) => p.data.tags))].sort((a, b) =>
+  byTitle(tagLabel(lang, a), tagLabel(lang, b)),
+);
 
 // Only item languages actually present in the (locale-filtered) list get an
 // option, and the dropdown renders only when there is a real choice - on the
@@ -104,7 +110,7 @@ const thumbnails = await Promise.all(
                 data-tag={tag}
                 aria-pressed="false"
               >
-                {capitalize(lang, tag)}
+                {tagLabel(lang, tag)}
               </button>
             ))
           }
@@ -139,7 +145,7 @@ const thumbnails = await Promise.all(
               <RecommendationCard
                 href={item.data.links[0].url}
                 title={item.data.title}
-                summary={item.data.description}
+                summary={localize(lang, item.data.description)}
                 imageUrl={thumbnails[i]}
                 imageAlt={item.data.thumbnailAlt ?? item.data.title}
                 links={item.data.links}

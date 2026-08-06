@@ -7,6 +7,8 @@ subtitle: "Est et dolore duis sunt id culpa Lorem aliquip et consequat nisi."
 summary: "Culpa dolor sint reprehenderit ullamco non."
 slug: "example-blog-post"
 date: 2026-06-15
+# Canonical tag slugs, shared verbatim by any translation of this post. A new
+# tag also gets its per-language display names in src/i18n/tags.ts.
 tags: ["treniņi", "sacensības"]
 thumbnail: "../../assets/thumb-example.jpg"
 thumbnailAlt: "Eu anim dolor consectetur" # TODO: real alt text

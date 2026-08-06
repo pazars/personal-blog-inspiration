@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from "astro/loaders";
+import { localized } from "./i18n/localized";
 
 // Blog articles authored as Markdown in src/content/posts/. The public URL is
 // built from the frontmatter `date` + `slug` (see src/pages/blogs/[...slug].astro),
@@ -47,7 +48,9 @@ const posts = defineCollection({
         .optional(),
       // "2026-05-28" -> Date.
       date: z.coerce.date(),
-      // Keyword tags used by the listing-page filter.
+      // Keyword tags used by the listing-page filter. CANONICAL slugs shared
+      // by every locale - a translation copies its original's tags verbatim;
+      // per-language display names live in src/i18n/tags.ts.
       tags: z.array(z.string()).default([]),
       // Local hero/thumbnail image, optimized at build time.
       thumbnail: image(),
@@ -75,9 +78,14 @@ const recommendations = defineCollection({
   loader: glob({ base: "./src/content/recommendations", pattern: "**/[^_]*.md" }),
   schema: z.object({
     title: z.string(),
-    // Shown as the card summary.
-    description: z.string(),
-    // Category tags used by the listing-page filter (lowercase, like blogs).
+    // Shown as the card summary. Localized: a plain string serves every
+    // locale (and reads as "not translated yet" - the English page falls
+    // back to it); the map form carries per-locale text:
+    //   description: { lv: "…", en: "…" }
+    description: localized(),
+    // Category tags used by the listing-page filter (lowercase). Same
+    // canonical-slug convention as posts: display names come from
+    // src/i18n/tags.ts.
     tags: z.array(z.string()).default([]),
     // Content language, used by the listing-page language dropdown.
     language: z.enum(["lv", "en"]),

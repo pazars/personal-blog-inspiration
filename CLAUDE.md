@@ -101,7 +101,8 @@ language code or a section path:
 | `index.ts` | `LOCALES`, `Locale`, `DEFAULT_LOCALE`, `LOCALE_TAG`, `OG_LOCALE`, `localeBase()`, `homePath()` |
 | `routes.ts` | `ROUTE_SEGMENTS` (the per-locale URL table), `path()`, `postPath()`, `navLinks()`, `sectionAlternates()`, `canonical()` |
 | `ui.ts` | the UI string dictionary + `useTranslations()` |
-| `posts.ts` | `postsFor()`, `localeOf()`, `counterpart()`, `postAlternates()`, `assertUniqueSlugs()` |
+| `posts.ts` | `postsFor()`, `localeOf()`, `counterpart()`, `postAlternates()` |
+| `post-invariants.ts` | build-time uniqueness checks for post slugs and per-locale translation keys |
 | `collate.ts` | `compare(lang)`, `capitalize(lang, s)` - replaces hardcoded `localeCompare(…, "lv")` |
 | `localized.ts` | `Localized` (string or complete per-locale map), `localize()`, `localized()` for invariant-or-localized data, and `localizedMap()` for prose required in every locale (imports zod, so NOT for Pages Functions) |
 | `tags.ts` | `TAG_LABELS` + `tagLabel()` - per-locale display names for canonical tag slugs |
@@ -225,7 +226,8 @@ to `/` alone also means **no `_routes.json` is needed**.
   naturally. That makes `slug` **globally unique across all locales** an
   invariant: a collision would silently merge two articles' counters *and*
   suppress one article's ping (they share the `localStorage["viewed:<slug>"]`
-  key). `assertUniqueSlugs()` in `src/i18n/posts.ts` fails the build instead.
+  key). `assertPostInvariants()` in `src/i18n/post-invariants.ts` fails the
+  build instead.
   Build the key with the same expression on both surfaces - the listing's
   `data-slug` and `BlogPost.astro`'s `viewKey`.
 - **Binding vs. database name**: the functions reach D1 through one binding,

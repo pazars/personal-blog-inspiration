@@ -57,4 +57,52 @@ describe("root language negotiation", () => {
     expect(response.status).toBe(200);
     expect(next).toHaveBeenCalledOnce();
   });
+
+  it("honours an explicit English query regardless of browser headers", async () => {
+    const request = new Request("https://davispazars.lv/?lang=en&from=test", {
+      headers: { "Accept-Language": "lv" },
+    });
+    const { context: ctx, next } = context(request);
+
+    const response = await onRequest(ctx);
+
+    expect(response.status).toBe(302);
+    expect(response.headers.get("location")).toBe(
+      "https://davispazars.lv/en/?from=test",
+    );
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  it("serves the root for an explicit Latvian query", async () => {
+    const request = new Request("https://davispazars.lv/?lang=lv", {
+      headers: {
+        "Accept-Language": "en",
+        "Sec-Fetch-Mode": "navigate",
+      },
+    });
+    const { context: ctx, next } = context(request);
+
+    const response = await onRequest(ctx);
+
+    expect(response.status).toBe(200);
+    expect(next).toHaveBeenCalledOnce();
+  });
+
+  it("ignores an unsupported query value and negotiates normally", async () => {
+    const request = new Request("https://davispazars.lv/?lang=de", {
+      headers: {
+        "Accept-Language": "en",
+        "Sec-Fetch-Mode": "navigate",
+      },
+    });
+    const { context: ctx, next } = context(request);
+
+    const response = await onRequest(ctx);
+
+    expect(response.status).toBe(302);
+    expect(response.headers.get("location")).toBe(
+      "https://davispazars.lv/en/?lang=de",
+    );
+    expect(next).not.toHaveBeenCalled();
+  });
 });

@@ -14,7 +14,7 @@ title: "Tempor incididunt sit velit"
 subtitle: "Duis fugiat minim aute consequat ea voluptate adipisicing proident."
 summary: "Magna fugiat tempor id nulla tempor proident sint."
 # English slug: it becomes the URL segment AND the D1 view-counter key, so it
-# must be unique across every locale (assertUniqueSlugs() fails the build
+# must be unique across every locale (assertPostInvariants() fails the build
 # otherwise). A translated post therefore never reuses the Latvian slug.
 slug: "example-english-post"
 # Links this post to its Latvian counterpart: set it to the ORIGINAL post's

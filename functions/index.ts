@@ -18,7 +18,7 @@ const LOCALES = ["lv", "en"] as const;
 type Lang = (typeof LOCALES)[number];
 const DEFAULT_LOCALE: Lang = "lv";
 
-const isLang = (value: string | undefined): value is Lang =>
+const isLang = (value: string | null | undefined): value is Lang =>
   !!value && (LOCALES as readonly string[]).includes(value);
 
 /** A stored, explicit choice. Written only by the switcher (public/script.js). */
@@ -71,8 +71,17 @@ export const onRequest: PagesFunction = async (context) => {
   if (url.pathname !== "/") return next();
 
   // An explicit ?lang= escape hatch, useful for testing and for linking someone
-  // to a specific language regardless of their browser.
-  if (url.searchParams.has("lang")) return next();
+  // to a specific language regardless of their browser. English redirects to
+  // its prefixed canonical home; Latvian stays at the unprefixed root. Unknown
+  // values are ignored and fall through to normal negotiation.
+  const requested = url.searchParams.get("lang");
+  if (isLang(requested)) {
+    if (requested === DEFAULT_LOCALE) return next();
+    const target = new URL(`/${requested}/`, url);
+    target.search = url.search;
+    target.searchParams.delete("lang");
+    return Response.redirect(target.toString(), 302);
+  }
 
   // Only redirect a real top-level browser navigation. Crawlers, unfurlers and
   // subresource fetches fall through to the Latvian page at 200, which carries

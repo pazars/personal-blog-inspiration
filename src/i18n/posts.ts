@@ -20,6 +20,7 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import { DEFAULT_LOCALE, isLocale, LOCALES, type Locale } from "./index";
 import { canonical, postPath } from "./routes";
+import { assertPostInvariants } from "./post-invariants";
 import { toIsoDate } from "../utils/date";
 
 export type Post = CollectionEntry<"posts">;
@@ -43,34 +44,20 @@ export const translationKeyOf = (entry: Post): string =>
   entry.data.translationKey ?? entry.data.slug;
 
 /**
- * `slug` is the D1 view-counter primary key and the localStorage dedupe key, so
- * a duplicate across locales would silently merge two articles' counts and drop
- * one article's ping. Neither the Zod regex nor the type system can express
- * "globally unique", so fail the build loudly instead of debugging it in
- * production six months from now.
- */
-function assertUniqueSlugs(all: Post[]): void {
-  const seen = new Map<string, string>();
-  for (const post of all) {
-    const previous = seen.get(post.data.slug);
-    if (previous) {
-      throw new Error(
-        `Duplicate post slug "${post.data.slug}" in "${previous}" and "${post.id}". ` +
-          `Slugs must be unique across ALL locales - they key the D1 view counter.`,
-      );
-    }
-    seen.set(post.data.slug, post.id);
-  }
-}
-
-/**
  * Published posts for one locale, newest first. Every listing, the home page and
  * the feed go through this, so the draft filter and sort order can't drift apart
  * between them.
  */
 export async function postsFor(lang: Locale): Promise<Post[]> {
   const all = await getCollection("posts", ({ data }) => !data.draft);
-  assertUniqueSlugs(all);
+  assertPostInvariants(
+    all.map((post) => ({
+      id: post.id,
+      locale: localeOf(post),
+      slug: post.data.slug,
+      translationKey: post.data.translationKey,
+    })),
+  );
   return all
     .filter((post) => localeOf(post) === lang)
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());

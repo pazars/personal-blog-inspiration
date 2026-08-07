@@ -31,8 +31,9 @@ const projects = await Promise.all(
     ...project,
     href: project.href[lang],
     resolvedImage:
-      project.imageUrl?.[lang] ??
-      (await fetchOgImage(project.ogSource![lang], project.ogFallback![lang])),
+      project.imageUrl
+        ? project.imageUrl[lang]
+        : await fetchOgImage(project.ogSource[lang], project.ogFallback[lang]),
   })),
 );
 
@@ -86,7 +87,7 @@ const recentPosts = articles.slice(1).map((a) => ({
         showDot={true}
         class="pt-3"
       />
-      
+
       <h2 class="h1 mb-1">
         <a href={currentPreparation.href[lang]} target="_blank" rel="noopener" class="d-inline-flex flex-items-center gap-2">
           {currentPreparation.title[lang]}

@@ -7,18 +7,32 @@
 import type { Locale } from "../i18n";
 import type { UIKey } from "../i18n/ui";
 
-export interface SideProject {
+interface SideProjectBase {
   href: Record<Locale, string>;
   title: string;
   roleKey: UIKey;
-  /** Remote og:image URL, or a fallback fetched at build time. */
-  imageUrl?: Record<Locale, string>;
-  /** Page to scrape an og:image from when `imageUrl` is absent. */
-  ogSource?: Record<Locale, string>;
-  ogFallback?: Record<Locale, string>;
   /** Optional backdrop colour behind logo-style images. */
   frameBg?: string;
 }
+
+type ExplicitProjectImage = {
+  /** A ready-to-render image URL for every locale. */
+  imageUrl: Record<Locale, string>;
+  ogSource?: never;
+  ogFallback?: never;
+};
+
+type FetchedProjectImage = {
+  imageUrl?: never;
+  /** Page whose og:image is fetched at build time. */
+  ogSource: Record<Locale, string>;
+  /** Used when the page has no readable og:image. */
+  ogFallback: Record<Locale, string>;
+};
+
+/** A project must provide either explicit images or a complete fetch fallback. */
+export type SideProject = SideProjectBase &
+  (ExplicitProjectImage | FetchedProjectImage);
 
 export const sideProjects: SideProject[] = [
   {

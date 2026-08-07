@@ -30,8 +30,8 @@ const posts = defineCollection({
       // one. It is the primary key of the D1 `page_views` table AND the
       // `localStorage["viewed:<slug>"]` dedupe key, so two posts sharing a slug
       // would silently share one view counter and suppress one of the two
-      // pings. The regex can't express that, so assertUniqueSlugs() in
-      // src/i18n/posts.ts fails the build instead. Translated posts get
+      // pings. The regex can't express that, so assertPostInvariants() in
+      // src/i18n/post-invariants.ts fails the build instead. Translated posts get
       // translated slugs, so this falls out naturally - don't defeat it.
       slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
       // Links this post to its counterpart in another language: both versions

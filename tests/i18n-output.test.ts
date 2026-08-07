@@ -1,15 +1,15 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { execSync } from "node:child_process";
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const DIST = join(process.cwd(), "dist");
 const englishHome = join(DIST, "en", "index.html");
 
 beforeAll(() => {
-  if (!existsSync(englishHome)) {
-    execSync("npm run build", { stdio: "inherit" });
-  }
+  // Always rebuild so `npm test` cannot accidentally assert against stale
+  // output left in dist by an earlier source revision.
+  execSync("npm run build", { stdio: "inherit" });
 }, 180_000);
 
 describe("English build output", () => {
@@ -31,6 +31,14 @@ describe("English build output", () => {
     expect(html).toContain('href="https://substack.com/@davispazars"');
     expect(html).not.toContain("data-js-newsletter-submit");
     expect(html).not.toContain("You can unsubscribe at any time");
+  });
+
+  it("keeps both Latvian signup surfaces wired to the shared form", () => {
+    const html = readFileSync(join(DIST, "vestkopa", "index.html"), "utf8");
+    expect(html.match(/data-js-newsletter-submit/g)).toHaveLength(2);
+    expect(html.match(/data-lang="lv"/g)).toHaveLength(2);
+    expect(html).toContain("No vēstkopas vari atteikties jebkurā brīdī");
+    expect(html).toContain("Katrā vēstkopas e-pastā tiek pievienots links");
   });
 
   it("keeps reciprocal translated section links in the page metadata", () => {

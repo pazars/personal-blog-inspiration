@@ -2,6 +2,7 @@
 import { DEFAULT_LOCALE, type Locale } from "../i18n";
 import { useTranslations } from "../i18n/ui";
 import NewsletterLanguageNotice from "./NewsletterLanguageNotice.astro";
+import NewsletterSignup from "./NewsletterSignup.astro";
 
 interface Props {
   lang: Locale;
@@ -25,47 +26,11 @@ const description = Astro.props.description ?? t("newsletter.formDescription");
       <NewsletterLanguageNotice lang={lang} />
     </section>
   ) : (
-    <section
-      class={`newsletter-form-section ${showBorder ? "border-top" : ""}`}
-      data-js-newsletter-form
-      data-lang={lang}
-      data-msg-pending={t("newsletter.pendingMessage")}
-      data-msg-hint={t("newsletter.pendingHint")}
-      data-msg-already={t("newsletter.alreadyMessage")}
-      data-msg-error={t("newsletter.errorMessage")}
-      data-msg-ratelimit={t("newsletter.rateLimitMessage")}
-    >
-      <p>{description}</p>
-      <form class="newsletter-form d-flex gap-2" data-js-newsletter-submit>
-        <input
-          type="email"
-          name="email"
-          placeholder={t("newsletter.emailPlaceholder")}
-          required
-          autocomplete="email"
-          class="newsletter-input flex-1"
-          data-js-newsletter-email
-        />
-        <button
-          type="submit"
-          class="newsletter-btn btn-secondary"
-          data-js-newsletter-btn
-          data-label-submitting={t("newsletter.submittingLabel")}
-        >
-          {t("newsletter.subscribeButton")}
-        </button>
-      </form>
-      <p class="newsletter-note">
-        {showUnsubscribeInfo
-          ? t("newsletter.unsubscribeInfo")
-          : t("newsletter.unsubscribeNote")}
-      </p>
-      <div class="newsletter-status" data-js-newsletter-status aria-live="polite"></div>
-      <div class="newsletter-toast" data-js-newsletter-toast hidden tabindex="-1">
-        <p class="newsletter-toast-text" data-js-toast-text aria-live="polite"></p>
-        <p class="newsletter-note" data-js-toast-hint></p>
-        <span class="newsletter-toast-bar" data-js-toast-bar aria-hidden="true"></span>
-      </div>
-    </section>
+    <NewsletterSignup
+      lang={lang}
+      description={description}
+      showBorder={showBorder}
+      showUnsubscribeInfo={showUnsubscribeInfo}
+    />
   )
 }

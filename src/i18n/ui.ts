@@ -43,10 +43,7 @@ const lv = {
   // switchLabel is the switcher group's aria-label. "Mājaslapas valoda" rather
   // than bare "Valoda" so screen-reader users can't confuse it with the
   // /iesaku "Valoda" filter (which is about the recommended item's language).
-  // alsoAvailable is not wired to any surface yet - reserved for a future
-  // "this article also exists in the other language" affordance.
   "lang.switchLabel": "Mājaslapas valoda",
-  "lang.alsoAvailable": "Pieejams arī:",
 
   // ---- Home page --------------------------------------------------------
   "home.currentlyPreparing": "Šobrīd gatavojos",
@@ -184,11 +181,10 @@ const en = {
   "footer.motto": "Dare to believe in yourself",
 
   "lang.switchLabel": "Site language",
-  "lang.alsoAvailable": "Also available:",
 
   "home.currentlyPreparing": "Currently preparing for",
   "home.intro":
-    "This website is my attempt to make useful information for runners freely available, without burying it in ads or hiding it behind sign-ups and paid subscriptions. I can also promise that every article is written and checked by me, not by some artificial intelligence tool.",
+    "This website is my attempt to make useful information for runners freely available, without burying it in ads or hiding it behind sign-ups and paid subscriptions. I can also promise that no blog posts will be written by or modified with AI.",
   "home.latestPost": "Latest article",
   "home.recentPosts": "Recent articles",
   "home.sideProjects": "Other projects",

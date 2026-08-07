@@ -65,13 +65,3 @@ export const localeBase = (lang: Locale): string =>
 
 /** A locale's home page: "/" or "/en/". */
 export const homePath = (lang: Locale): string => `${localeBase(lang)}/`;
-
-/**
- * Recover the locale from a pathname: "/en/blog" -> "en", "/blogs" -> "lv".
- * Anything unrecognised is the default locale, so this never throws on a 404
- * path or a stray segment.
- */
-export function localeFromPath(pathname: string): Locale {
-  const first = pathname.replace(/^\/+/, "").split("/")[0] ?? "";
-  return first !== DEFAULT_LOCALE && isLocale(first) ? first : DEFAULT_LOCALE;
-}

@@ -21,7 +21,7 @@ export interface RaceResult {
 
 export const trailRunning: RaceResult[] = [
   {
-    title: { lv: "Vilkaču maratons 🏆", en: "Vilkaču maratons 🏆" },
+    title: { lv: "Vilkaču maratons 🏆", en: "Werewolf Marathon 🏆" },
     description: "42km · 2200m · 04:19:22",
     trailing: "2026",
   },

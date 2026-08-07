@@ -51,8 +51,8 @@ describe("English build output", () => {
     expect(latvian).toContain(
       '<link rel="alternate" hreflang="en" href="https://davispazars.lv/en/achievements/">',
     );
-    expect(english).toContain("Vilkaču maratons");
-    expect(english).not.toContain("Werewolf Marathon");
+    expect(english).toContain("Werewolf Marathon");
+    expect(english).not.toContain("Vilkaču maratons");
   });
 
   it("renders the localized current preparation event and destination", () => {

@@ -226,6 +226,20 @@ section.section-hero.-no-eyebrow {
   padding-top: 40px;
 }
 
+/* The homepage is a single flowing overview, so its content blocks should sit
+   closer together than standalone page sections. Keep the first hero untouched
+   so the header-to-preparation spacing remains the established 56px rhythm. */
+main.home-page > section:not(:first-child) {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* The global footer gap suits long listing and article pages but feels detached
+   after the homepage project card. Preserve the footer's bottom breathing room. */
+main.home-page + footer {
+  margin-top: 48px;
+}
+
 /* ===== Utility Classes ===== */
 .d-block { display: block !important; }
 .d-flex { display: flex !important; }

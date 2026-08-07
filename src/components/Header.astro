@@ -1,10 +1,11 @@
 ---
 import { site } from "../site.config";
 import { gravatarUrl } from "../utils/avatar";
-import { homePath, type Locale } from "../i18n";
+import { DEFAULT_LOCALE, homePath, type Locale } from "../i18n";
 import { navLinks, type ActivePage } from "../i18n/routes";
 import { useTranslations } from "../i18n/ui";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+import NewsletterLanguageNotice from "./NewsletterLanguageNotice.astro";
 
 // Site-wide profile image from the Gravatar account (see src/utils/avatar.ts).
 const gravatarAvatar = gravatarUrl(160);
@@ -176,46 +177,54 @@ const nav = navLinks(lang);
           </div>
         </div>
         <div class="panel subscribe-panel" data-js-dropdown-panel>
-          <div
-            class="subscribe-popup"
-            data-js-newsletter-form
-            data-lang={lang}
-            data-msg-pending={t("newsletter.pendingMessage")}
-            data-msg-hint={t("newsletter.pendingHint")}
-            data-msg-already={t("newsletter.alreadyMessage")}
-            data-msg-error={t("newsletter.errorMessage")}
-            data-msg-ratelimit={t("newsletter.rateLimitMessage")}
-          >
-            <p class="subscribe-popup-desc">
-              {t("header.newsletterBlurb")}
-            </p>
-            <form class="subscribe-popup-form d-flex gap-2" data-js-newsletter-submit>
-              <input
-                type="email"
-                name="email"
-                placeholder={t("newsletter.emailPlaceholder")}
-                required
-                autocomplete="email"
-                class="newsletter-input flex-1"
-                data-js-newsletter-email
-              />
-              <button
-                type="submit"
-                class="newsletter-btn btn-secondary"
-                data-js-newsletter-btn
-                data-label-submitting={t("newsletter.submittingLabel")}
+          {
+            lang !== DEFAULT_LOCALE ? (
+              <div class="subscribe-popup">
+                <NewsletterLanguageNotice lang={lang} />
+              </div>
+            ) : (
+              <div
+                class="subscribe-popup"
+                data-js-newsletter-form
+                data-lang={lang}
+                data-msg-pending={t("newsletter.pendingMessage")}
+                data-msg-hint={t("newsletter.pendingHint")}
+                data-msg-already={t("newsletter.alreadyMessage")}
+                data-msg-error={t("newsletter.errorMessage")}
+                data-msg-ratelimit={t("newsletter.rateLimitMessage")}
               >
-                {t("newsletter.subscribeButton")}
-              </button>
-            </form>
-            <p class="newsletter-note">{t("newsletter.unsubscribeNote")}</p>
-            <div class="newsletter-status" data-js-newsletter-status aria-live="polite"></div>
-            <div class="newsletter-toast" data-js-newsletter-toast hidden tabindex="-1">
-              <p class="newsletter-toast-text" data-js-toast-text aria-live="polite"></p>
-              <p class="newsletter-note" data-js-toast-hint></p>
-              <span class="newsletter-toast-bar" data-js-toast-bar aria-hidden="true"></span>
-            </div>
-          </div>
+                <p class="subscribe-popup-desc">
+                  {t("header.newsletterBlurb")}
+                </p>
+                <form class="subscribe-popup-form d-flex gap-2" data-js-newsletter-submit>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder={t("newsletter.emailPlaceholder")}
+                    required
+                    autocomplete="email"
+                    class="newsletter-input flex-1"
+                    data-js-newsletter-email
+                  />
+                  <button
+                    type="submit"
+                    class="newsletter-btn btn-secondary"
+                    data-js-newsletter-btn
+                    data-label-submitting={t("newsletter.submittingLabel")}
+                  >
+                    {t("newsletter.subscribeButton")}
+                  </button>
+                </form>
+                <p class="newsletter-note">{t("newsletter.unsubscribeNote")}</p>
+                <div class="newsletter-status" data-js-newsletter-status aria-live="polite"></div>
+                <div class="newsletter-toast" data-js-newsletter-toast hidden tabindex="-1">
+                  <p class="newsletter-toast-text" data-js-toast-text aria-live="polite"></p>
+                  <p class="newsletter-note" data-js-toast-hint></p>
+                  <span class="newsletter-toast-bar" data-js-toast-bar aria-hidden="true"></span>
+                </div>
+              </div>
+            )
+          }
         </div>
       </div>
     </div>

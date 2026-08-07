@@ -18,6 +18,7 @@ export const site = {
   socials: [
     { label: "Youtube", href: "https://www.youtube.com/@dpazars" },
     { label: "Instagram", href: "https://www.instagram.com/pazars/" },
+    { label: "Substack", href: "https://substack.com/@davispazars" },
     { label: "ITRA", href: "https://itra.run/RunnerSpace/pazars.davis.5907661" },
   ],
   // Latvian athletics federation results profile - linked from the achievements

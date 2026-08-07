@@ -7,7 +7,7 @@
 import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
 import { site } from "../site.config";
-import { LOCALE_TAG, type Locale } from "../i18n";
+import { homePath, LOCALE_TAG, type Locale } from "../i18n";
 import { canonical, postPath } from "../i18n/routes";
 import { useTranslations } from "../i18n/ui";
 import { postsFor } from "../i18n/posts";
@@ -25,7 +25,7 @@ export async function buildFeed(lang: Locale, context: APIContext) {
   return rss({
     title: `${site.name} - ${t("site.tagline")}`,
     description: t("blog.description"),
-    site: context.site ?? site.url,
+    site: new URL(homePath(lang), context.site ?? site.url),
     items: posts.map((post) => ({
       title: post.data.title,
       description: post.data.summary,

@@ -21,12 +21,15 @@ export interface RaceResult {
 
 export const trailRunning: RaceResult[] = [
   {
-    title: "Vilkaču maratons 🏆",
+    title: { lv: "Vilkaču maratons 🏆", en: "Vilkaču maratons 🏆" },
     description: "42km · 2200m · 04:19:22",
     trailing: "2026",
   },
   {
-    title: "Siguldas kalnu maratons 🏆",
+    title: {
+      lv: "Siguldas kalnu maratons 🏆",
+      en: "Sigulda Mountain Marathon 🏆",
+    },
     description: "35km · 1400m · 03:23:37",
     trailing: "2025",
   },
@@ -34,17 +37,17 @@ export const trailRunning: RaceResult[] = [
 
 export const roadRunning: RaceResult[] = [
   {
-    title: "Kauņas maratons",
+    title: { lv: "Kauņas maratons", en: "Kaunas Marathon" },
     description: "42.2km · 02:47:13",
     trailing: "2025",
   },
   {
-    title: "Liepājas pusmaratons",
+    title: { lv: "Liepājas pusmaratons", en: "Liepāja Half Marathon" },
     description: "21.1km · 01:16:25",
     trailing: "2025",
   },
   {
-    title: "Latvijas čempionāts 5km",
+    title: { lv: "Latvijas čempionāts 5km", en: "Latvian 5K Championship" },
     description: "5km · 16:28",
     trailing: "2025",
   },
@@ -57,7 +60,7 @@ export const cycling: RaceResult[] = [
     trailing: "2024",
   },
   {
-    title: "Ultra Gravel Latvija 🥈",
+    title: { lv: "Ultra Gravel Latvija 🥈", en: "Ultra Gravel Latvia 🥈" },
     description: "583km · 2764m · 24h41m",
     trailing: "2024",
   },

@@ -1,7 +1,7 @@
 import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from "astro/loaders";
-import { localized } from "./i18n/localized";
+import { localizedMap } from "./i18n/localized";
 
 // Blog articles authored as Markdown in src/content/posts/. The public URL is
 // built from the frontmatter `date` + `slug` (see src/pages/blogs/[...slug].astro),
@@ -78,11 +78,10 @@ const recommendations = defineCollection({
   loader: glob({ base: "./src/content/recommendations", pattern: "**/[^_]*.md" }),
   schema: z.object({
     title: z.string(),
-    // Shown as the card summary. Localized: a plain string serves every
-    // locale (and reads as "not translated yet" - the English page falls
-    // back to it); the map form carries per-locale text:
+    // Shown as the card summary. Text is required for every locale, so English
+    // cards cannot silently fall back to Latvian:
     //   description: { lv: "…", en: "…" }
-    description: localized(),
+    description: localizedMap(),
     // Category tags used by the listing-page filter (lowercase). Same
     // canonical-slug convention as posts: display names come from
     // src/i18n/tags.ts.

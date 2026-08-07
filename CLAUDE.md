@@ -103,7 +103,7 @@ language code or a section path:
 | `ui.ts` | the UI string dictionary + `useTranslations()` |
 | `posts.ts` | `postsFor()`, `localeOf()`, `counterpart()`, `postAlternates()`, `assertUniqueSlugs()` |
 | `collate.ts` | `compare(lang)`, `capitalize(lang, s)` - replaces hardcoded `localeCompare(…, "lv")` |
-| `localized.ts` | `Localized` (string or per-locale map), `localize()`, the `localized()` zod field - for content/data strings, with fallback to Latvian (imports zod, so NOT for Pages Functions) |
+| `localized.ts` | `Localized` (string or complete per-locale map), `localize()`, `localized()` for invariant-or-localized data, and `localizedMap()` for prose required in every locale (imports zod, so NOT for Pages Functions) |
 | `tags.ts` | `TAG_LABELS` + `tagLabel()` - per-locale display names for canonical tag slugs |
 
 ### The dictionary is type-enforced - use it

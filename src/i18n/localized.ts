@@ -6,7 +6,7 @@
 //
 // Two shapes:
 //   "same text everywhere"            -> a plain string
-//   "differs (or will) per locale"    -> { lv: "...", en: "..." }, lv required
+//   "differs per locale"              -> { lv: "...", en: "..." }, all required
 //
 // NOTE: this module imports zod, so unlike ./index and ./routes it must NOT
 // be imported by the Pages Functions - keep it to the Astro side.
@@ -15,7 +15,11 @@ import { DEFAULT_LOCALE, LOCALES, type Locale } from "./index";
 
 export type Localized =
   | string
-  | (Record<typeof DEFAULT_LOCALE, string> & Partial<Record<Locale, string>>);
+  | Record<Locale, string>;
+
+const localizedShape = Object.fromEntries(
+  LOCALES.map((code) => [code, z.string()]),
+) as unknown as Record<Locale, z.ZodString>;
 
 /** Resolve a Localized value for a locale, falling back to the default. */
 export const localize = (lang: Locale, value: Localized): string =>
@@ -23,18 +27,15 @@ export const localize = (lang: Locale, value: Localized): string =>
 
 /**
  * Zod schema for a Localized frontmatter field. Built from LOCALES so a new
- * locale is accepted the moment it exists; only the default locale's text is
- * required in the map form.
+ * locale is required in the map form. A plain string remains available for
+ * locale-invariant values such as proper names.
  */
 export const localized = () =>
   z.union([
     z.string(),
-    z.object(
-      Object.fromEntries(
-        LOCALES.map((code) => [
-          code,
-          code === DEFAULT_LOCALE ? z.string() : z.string().optional(),
-        ]),
-      ) as Record<Locale, z.ZodTypeAny>,
-    ),
+    z.object(localizedShape),
   ]) as z.ZodType<Localized>;
+
+/** Zod schema for prose that must be written in every supported locale. */
+export const localizedMap = () =>
+  z.object(localizedShape) as z.ZodType<Record<Locale, string>>;

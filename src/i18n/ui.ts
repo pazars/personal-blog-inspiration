@@ -34,7 +34,7 @@ const lv = {
   "header.avatarLargeAlt": "Profila attēls, palielināts",
   "header.openMenu": "Atvērt izvēlni",
   "header.newsletterTooltip": "Vēstkopa",
-  "header.newsletterBlurb": "Kopsavilkumi par jaunākajiem rakstiem",
+  "header.newsletterBlurb": "Vēstkopa",
 
   // ---- Footer -----------------------------------------------------------
   "footer.motto": "Uzdrīksties sev noticēt",
@@ -55,8 +55,7 @@ const lv = {
   "home.latestPost": "Jaunākais raksts",
   "home.recentPosts": "Pēdējie raksti",
   "home.sideProjects": "Citi projekti",
-  "home.project.pasaulesTure.role": "Riteņbraukšanas pasākumi Latvijā (ar našķiem)",
-  "home.project.noskrienZiemu.role": "Dalībnieku rezultātu salīdzināšana",
+  "home.project.pasaulesTure.role": "Gravel riteņbraukšanas pasākumi Latvijā (ar našķiem)",
 
   // ---- Blog listing -----------------------------------------------------
   "blog.title": "Blogs",
@@ -99,7 +98,7 @@ const lv = {
   "results.profilesNote.after": " profilā.",
   "results.trailRunning": "Taku skriešana",
   "results.roadRunning": "Šosejas skriešana",
-  "results.cycling": "Riteņbraukšana",
+  "results.cycling": "Ultra riteņbraukšana",
   // Heading anchor ids (`#taku-skriesana`). URL data, not prose - the Latvian
   // ones must not change, they are already linkable.
   "results.anchor.trailRunning": "taku-skriesana",
@@ -121,6 +120,10 @@ const lv = {
   "newsletter.emailPlaceholder": "tavs@epasts.lv",
   "newsletter.formDescription":
     "Vēlies saņemt paziņojumus par jaunākajiem bloga rakstiem? Piesakies vēstkopai!",
+  "newsletter.substackNotice.before": "Vēstkopa angļu valodā pagaidām nav pieejama.",
+  "newsletter.substackNotice.before2": "Manus ierakstus angļu valodā vari lasīt, ",
+  "newsletter.substackNotice.linkText": "pierakstoties manam Substack",
+  "newsletter.substackNotice.after": ".",
 
   // ---- Newsletter page (/vestkopa) --------------------------------------
   "newsletter.pageTitle": "Vēstkopa",
@@ -156,10 +159,10 @@ const lv = {
 export type UIKey = keyof typeof lv;
 
 const en = {
-  "site.role": "Trail runner, programmer",
+  "site.role": "Trail runner, developer",
   "site.tagline": "A trail running blog",
   "meta.defaultDescription":
-    "On what's current, my own experience, and lessons that can be useful to anyone.",
+    "Current topics, my own experience, and lessons that might help others.",
 
   // Nav labels must fit the open mobile menu's single row at the 360px floor:
   // with the open-menu pill padding the three labels get ~215px, and the
@@ -176,25 +179,24 @@ const en = {
   "header.avatarLargeAlt": "Profile picture, enlarged",
   "header.openMenu": "Open menu",
   "header.newsletterTooltip": "Newsletter",
-  "header.newsletterBlurb": "Summaries of the latest articles",
+  "header.newsletterBlurb": "Newsletter",
 
   "footer.motto": "Dare to believe in yourself",
 
   "lang.switchLabel": "Site language",
-  "lang.alsoAvailable": "Also available in:",
+  "lang.alsoAvailable": "Also available:",
 
   "home.currentlyPreparing": "Currently preparing for",
   "home.intro":
-    "This website is my attempt to create a place for freely accessible information useful to runners - not buried in ads or hidden behind registrations and paid subscriptions. I can also promise that every article here is written and checked by me, not by some artificial intelligence tool.",
+    "This website is my attempt to make useful information for runners freely available, without burying it in ads or hiding it behind sign-ups and paid subscriptions. I can also promise that every article is written and checked by me, not by some artificial intelligence tool.",
   "home.latestPost": "Latest article",
   "home.recentPosts": "Recent articles",
   "home.sideProjects": "Other projects",
-  "home.project.pasaulesTure.role": "Cycling events in Latvia (with treats)",
-  "home.project.noskrienZiemu.role": "Comparing participants' results",
+  "home.project.pasaulesTure.role": "Gravel cycling events in Latvia (with snacks)",
 
   "blog.title": "Blog",
   "blog.description":
-    "All the articles about training, race recaps, and taking lessons from sport into the rest of life.",
+    "All my articles on training, race recaps, and taking lessons from sport into the rest of life.",
   "blog.filterByTopic": "Filter by topic",
   "blog.allTopics": "All topics",
   "blog.sortLabel": "Sort",
@@ -205,7 +207,7 @@ const en = {
 
   "recs.title": "Picks",
   "recs.description": "People and content that inspire me.",
-  "recs.intro": "People and content that inspire me. More to come.",
+  "recs.intro": "People and content that inspire me. I'll keep adding to the list.",
   "recs.filterByCategory": "Filter by category",
   "recs.all": "All",
   "recs.languageLabel": "Language",
@@ -217,17 +219,17 @@ const en = {
   "recs.placeholderLabel": "Picks",
 
   "results.title": "Achievements",
-  "results.description": "The achievements I am proudest of",
+  "results.description": "The achievements I'm proudest of",
   "results.intro":
-    "Honestly, what makes me happiest is my own growth alongside sport, not any particular race. If I look back at myself 5 years ago, I am not at all the same person, and a large share of the positive changes is thanks to sport.",
+    "What makes me happiest, really, is how I have grown through sport, not any one race. When I look back at who I was five years ago, I am nowhere near the same person. A lot of those positive changes are thanks to sport.",
   "results.intro2":
-    "Of course, some moments have pressed themselves into memory harder than others, and those are the ones collected here.",
-  "results.profilesNote.before": "A fuller list of results can be found on my ",
+    "Of course, a few events have stayed with me more vividly than others. You can find them here.",
+  "results.profilesNote.before": " A longer list of results is on my ",
   "results.profilesNote.between": " profile and on the Latvian Athletics Association's ",
-  "results.profilesNote.after": " page.",
+  "results.profilesNote.after": " profile.",
   "results.trailRunning": "Trail running",
   "results.roadRunning": "Road running",
-  "results.cycling": "Cycling",
+  "results.cycling": "Ultra cycling",
   // Anchor slugs are URL data, not copy - safe to fill.
   "results.anchor.trailRunning": "trail-running",
   "results.anchor.roadRunning": "road-running",
@@ -237,37 +239,42 @@ const en = {
   "newsletter.submittingLabel": "Sending…",
   "newsletter.unsubscribeNote": "You can unsubscribe at any time",
   "newsletter.unsubscribeInfo":
-    "Every newsletter email includes a link to opt out of future messages",
-  "newsletter.pendingMessage": "A confirmation email is on its way to you",
-  "newsletter.pendingHint": "Nothing there? Check your spam folder too.",
-  "newsletter.alreadyMessage": "You are already subscribed to the newsletter.",
-  "newsletter.errorMessage": "Subscribing failed. Try again in a little while.",
+    "Every newsletter email includes a link to unsubscribe from future messages",
+  "newsletter.pendingMessage": "A confirmation email has been sent to you",
+  "newsletter.pendingHint": "Didn't get it? Check your spam folder too.",
+  "newsletter.alreadyMessage": "You're already signed up for the newsletter.",
+  "newsletter.errorMessage": "Couldn't sign you up. Try again a little later.",
   "newsletter.rateLimitMessage":
-    "The server is having a hard time. Please try again in a little while.",
+    "The server is struggling. Please try again a little later.",
   "newsletter.emailPlaceholder": "your@email.com",
   "newsletter.formDescription":
-    "Want to hear about the latest blog articles? Join the newsletter!",
+    "Want to know when a new blog article is out? Sign up for the newsletter!",
+  "newsletter.substackNotice.before":
+    "The newsletter isn't available in English yet.",
+  "newsletter.substackNotice.before2": "In the meantime, you can ",
+  "newsletter.substackNotice.linkText": "subscribe to my Substack",
+  "newsletter.substackNotice.after": ", where I write in English.",
 
   "newsletter.pageTitle": "Newsletter",
   "newsletter.pageDescription":
-    "Join the Dāvis Pazars newsletter and get blog article summaries by email every few weeks.",
-  "newsletter.pageHeading": "Join the newsletter",
+    "The newsletter isn't available in English yet. In the meantime, read Dāvis Pazars on Substack.",
+  "newsletter.pageHeading": "Newsletter",
 
-  "newsletter.confirmed.title": "Subscription confirmed",
+  "newsletter.confirmed.title": "You're signed up",
   "newsletter.confirmed.body":
-    "Your email address has been confirmed.\n From now on you'll receive summaries of the latest articles.",
+    "Your email address is confirmed.\n You'll now receive roundups of the latest articles in Latvian.",
   "newsletter.confirmed.linkText": "Back to the blog",
   "newsletter.confirmed.metaDescription":
     "Your subscription to the Dāvis Pazars newsletter is confirmed.",
   "newsletter.invalid.title": "Link invalid or expired",
   "newsletter.invalid.body":
-    "This confirmation link could not be verified - it may have expired or already been used. Sign up again and we'll send you a new link.",
+    "We couldn't verify this confirmation link. It may have expired or already been used. Sign up again and we'll send you a new one.",
   "newsletter.invalid.linkText": "Sign up again",
   "newsletter.invalid.metaDescription":
     "This confirmation link is invalid or expired.",
-  "newsletter.unsubscribed.title": "You are unsubscribed",
+  "newsletter.unsubscribed.title": "You've unsubscribed",
   "newsletter.unsubscribed.body":
-    "Your email address has been removed from the newsletter's mailing list. You won't receive any more emails.",
+    "Your email address has been removed from the newsletter mailing list. You won't receive any more emails.",
   "newsletter.unsubscribed.linkText": "Back to the blog",
   "newsletter.unsubscribed.metaDescription": "You won't receive any more emails.",
 

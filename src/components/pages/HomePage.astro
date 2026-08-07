@@ -10,6 +10,7 @@ import { toIsoDate, formatPostDate } from "../../utils/date";
 import { fetchOgImage } from "../../utils/ogImage";
 import { cardThumbnail } from "../../utils/postImages";
 import { sideProjects } from "../../data/side-projects";
+import { currentPreparation } from "../../data/current-preparation";
 import type { Locale } from "../../i18n";
 import { homeAlternates, postPath } from "../../i18n/routes";
 import { useTranslations } from "../../i18n/ui";
@@ -28,9 +29,10 @@ const alternates = homeAlternates();
 const projects = await Promise.all(
   sideProjects.map(async (project) => ({
     ...project,
+    href: project.href[lang],
     resolvedImage:
-      project.imageUrl ??
-      (await fetchOgImage(project.ogSource!, project.ogFallback!)),
+      project.imageUrl?.[lang] ??
+      (await fetchOgImage(project.ogSource![lang], project.ogFallback![lang])),
   })),
 );
 
@@ -86,8 +88,8 @@ const recentPosts = articles.slice(1).map((a) => ({
       />
       
       <h2 class="h1 mb-1">
-        <a href="https://oisanstrailtour.fr/en/home/" target="_blank" rel="noopener" class="d-inline-flex flex-items-center gap-2">
-          Oisans Trail Tour
+        <a href={currentPreparation.href[lang]} target="_blank" rel="noopener" class="d-inline-flex flex-items-center gap-2">
+          {currentPreparation.title[lang]}
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="trailingIcon"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
         </a>
       </h2>
@@ -141,7 +143,7 @@ const recentPosts = articles.slice(1).map((a) => ({
     <!-- Side projects -->
     <section>
       <SectionHeader id="side-projects" title={t("home.sideProjects")} />
-      <div class="content-grid -equal">
+      <div class="content-grid -equal -single-column">
         {
           projects.map((project) => (
             <ProjectCard

@@ -1,38 +1,40 @@
 // "Citi projekti" cards on the home page.
 //
-// The URL and the image are locale-invariant; the one-line description is not,
-// so it is a `roleKey` pointing into src/i18n/ui.ts rather than a literal
-// string. That means adding a project won't compile until its description
-// exists in BOTH dictionaries - the type system, not a checklist, keeps the two
-// languages in sync.
+// Project destinations and fallback images may vary by locale. The one-line
+// description is a `roleKey` pointing into src/i18n/ui.ts. Together these types
+// make adding both language versions a compile-time requirement.
 
+import type { Locale } from "../i18n";
 import type { UIKey } from "../i18n/ui";
 
 export interface SideProject {
-  href: string;
+  href: Record<Locale, string>;
   title: string;
   roleKey: UIKey;
   /** Remote og:image URL, or a fallback fetched at build time. */
-  imageUrl?: string;
+  imageUrl?: Record<Locale, string>;
   /** Page to scrape an og:image from when `imageUrl` is absent. */
-  ogSource?: string;
-  ogFallback?: string;
+  ogSource?: Record<Locale, string>;
+  ogFallback?: Record<Locale, string>;
   /** Optional backdrop colour behind logo-style images. */
   frameBg?: string;
 }
 
 export const sideProjects: SideProject[] = [
   {
-    href: "https://pasaulesture.lv/",
+    href: {
+      lv: "https://pasaulesture.lv/",
+      en: "https://pasaulesture.lv/en/",
+    },
     title: "Pasaules Tūre",
     roleKey: "home.project.pasaulesTure.role",
-    ogSource: "https://pasaulesture.lv/",
-    ogFallback: "https://pasaulesture.lv/events/egipte-malta/og/og-image-lv.jpg",
-  },
-  {
-    href: "https://noskrien-ziemu.pages.dev/",
-    title: "noskrien-ziemu.pages.dev",
-    roleKey: "home.project.noskrienZiemu.role",
-    imageUrl: "https://noskrien-ziemu.pages.dev/og-image.png",
+    ogSource: {
+      lv: "https://pasaulesture.lv/",
+      en: "https://pasaulesture.lv/en/",
+    },
+    ogFallback: {
+      lv: "https://pasaulesture.lv/events/parize-dakara/og/og-image-lv.jpg",
+      en: "https://pasaulesture.lv/events/parize-dakara/og/og-image-en.jpg",
+    },
   },
 ];

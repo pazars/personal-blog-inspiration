@@ -1074,8 +1074,9 @@ nav > .link.active {
     min-height: 0;
   }
 }
-/* Stacked (mobile): the thumbnail needs its own height. */
-.featured-card > .image-wrapper > .image {
+/* The latest article and full-width project rows share the same image crop. */
+.featured-card > .image-wrapper > .image,
+.content-grid.-single-column .image-wrapper > .image {
   object-fit: cover;
   height: 240px;
 }
@@ -1188,6 +1189,15 @@ nav > .link.active {
       "content3 content4"
       "content5 content6";
   }
+}
+
+/* Full-width cards, with every additional item starting a new row. */
+.content-grid.-single-column {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: none;
+}
+.content-grid.-single-column > .content {
+  grid-area: auto;
 }
 
 /* ===== Trailing Icon (external link arrow) ===== */

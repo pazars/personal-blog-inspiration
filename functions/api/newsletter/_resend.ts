@@ -43,7 +43,7 @@ export async function addContact(
 // Flag a contact as unsubscribed (suppress, don't delete) so Resend honors the
 // opt-out and the address can't be silently re-added later. A not-found contact is
 // treated as success: someone can click "unsubscribe" in the confirm email before
-// ever confirming, so there may be no contact to update — that's a no-op, not an error.
+// ever confirming, so there may be no contact to update - that's a no-op, not an error.
 export async function setUnsubscribed(
   resend: Resend,
   audienceId: string,
